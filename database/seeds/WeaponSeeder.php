@@ -11,6 +11,16 @@ class WeaponSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $weapons = [
+            ['name' => 'none'],
+            ['name' => 'Swords'],
+            ['name' => 'Fighting knives and daggers'],
+            ['name' => 'Blunt staves'],
+            ['name' => 'Throwing sticks'],
+        ];
+
+        foreach ( $weapons as $weapon){
+            \App\Weapon::create($weapon);
+        }
     }
 }

@@ -11,6 +11,13 @@ class FightSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $fights = [
+           [ 'fight_name' => null]
+        ];
+
+        foreach ( $fights as $fight){
+
+            \App\Fight::create($fight);
+        }
     }
 }
