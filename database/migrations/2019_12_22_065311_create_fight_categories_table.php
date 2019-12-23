@@ -16,7 +16,7 @@ class CreateFightCategoriesTable extends Migration
         Schema::create('fight_categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('fight_group_name');
-            $table->string('group_note');
+            $table->string('group_note')->nullable();
             $table->timestamps();
         });
     }

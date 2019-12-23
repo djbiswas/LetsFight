@@ -19,8 +19,9 @@ class CreatePlayersTable extends Migration
             $table->integer('Height')->nullable();
             $table->integer('weight')->nullable();
             $table->integer('age')->nullable();
-            $table->string('form')->nullable();
+            $table->string('from')->nullable();
             $table->string('identity')->nullable();
+            $table->string('image')->nullable();
             $table->unsignedBigInteger('weapon_id')->default('1');
             $table->foreign('weapon_id')->references('id')->on('weapons')->onUpdate('cascade');
             $table->timestamps();

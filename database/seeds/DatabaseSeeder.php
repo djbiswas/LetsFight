@@ -18,8 +18,15 @@ class DatabaseSeeder extends Seeder
          factory(\App\User::class, 50)->create()->each(
              function ($user){ $user->roles()->attach(['2']);}
          );
+
         $this->call(WeaponSeeder::class);
-        factory(\App\Player::class, 100)->create();
+        factory(\App\Player::class, 50)->create();
+
+        $this->call(FightCategorySeeder::class);
+        $this->call(FightSeeder::class);
+        factory(\App\Vote::class, 5000)->create();
+        factory( \App\Comment::class, 500 )->create();
+
 
     }
 }
