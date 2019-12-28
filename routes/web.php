@@ -11,10 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'FightCategoryController@index')->name('fightCategory.index');
+Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/fight-category/{fightCategory}', 'FightCategoryController@show')->name('fightCategory.show');
+Route::get('fights/{fight}', 'FightController@show')->name('fights.show');
+Route::post('fights/{fight}/vote/{player}', 'FightController@addVote')->name('fights.addVote');
+Route::post('fights/{fight}/comment', 'FightController@addComment')->name('fights.comment');

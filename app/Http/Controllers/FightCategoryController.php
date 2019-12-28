@@ -14,7 +14,10 @@ class FightCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $fightCategories = FightCategory::all();
+      //  return $fightCategories;
+
+        return view('welcome',compact('fightCategories'));
     }
 
     /**
@@ -44,9 +47,11 @@ class FightCategoryController extends Controller
      * @param  \App\FightCategory  $fightCategory
      * @return \Illuminate\Http\Response
      */
-    public function show(FightCategory $fightCategory)
+    public function show($fightCategory)
     {
-        //
+        $fightsCat = FightCategory::with('fights')->find($fightCategory);
+     //   return $fightsCat;
+       return  view('fightCategory.show', compact('fightsCat'));
     }
 
     /**

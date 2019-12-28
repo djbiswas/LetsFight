@@ -18,8 +18,8 @@ class CreateVotesTable extends Migration
             $table->unsignedBigInteger('fight_id');
             $table->ipAddress('visitor_ip');
             $table->unsignedBigInteger('player_id');
-            $table->foreign('fight_id')->references('id')->on('fights')->onDelete('cascade');
-            $table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');
+            $table->foreign('fight_id')->references('id')->on('fights')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('player_id')->references('id')->on('players')->onDelete('cascade')->onUpdate('cascade');;
             $table->timestamps();
         });
     }

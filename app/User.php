@@ -19,6 +19,7 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -42,5 +43,10 @@ class User extends Authenticatable
     public function profile(){
 
         return $this->hasOne(Profile::class ) ;
+    }
+
+    public function comments(){
+
+        return $this->hasMany(Comment::class) ;
     }
 }

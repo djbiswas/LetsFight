@@ -9,6 +9,8 @@ class Fight extends Model
 {
     protected $guarded =[];
 
+   // protected $withCount = ['votes','comments'];
+
     public function players(){
 
         return $this->belongsToMany(Player::class)->using(FightPlayer::class) ;
@@ -18,4 +20,15 @@ class Fight extends Model
 
         return $this->hasMany(Vote::class) ;
     }
+
+    public function fightCategory(){
+
+        return $this->belongsTo(FightCategory::class) ;
+    }
+    public function comments(){
+
+        return $this->hasMany(Comment::class) ;
+    }
+
+
 }

@@ -13,12 +13,12 @@ class FightCategorySeeder extends Seeder
     {
         $fightGroups = [
 
-          ['fight_group_name' => 'Historical Figure'],
-          ['fight_group_name' => 'Animal'],
-          ['fight_group_name' => 'Combat Athletics'],
-          ['fight_group_name' => 'Celebrities'],
-          ['fight_group_name' => 'Tv-Movie Characters'],
-          ['fight_group_name' => 'Game Characters'],
+          ['fight_group_name' => 'Historical Figure','category_image' => 'Historical-Figure.jpg'],
+          ['fight_group_name' => 'Animal','category_image' => 'animals-fight.jpg'],
+          ['fight_group_name' => 'Combat Athletics','category_image' => 'Combat-Athletics.jpg'],
+          ['fight_group_name' => 'Celebrities','category_image' => 'Celebrities.jpg'],
+          ['fight_group_name' => 'Tv-Movie Characters','category_image' => 'Tv-Movie-Characters.jpg'],
+          ['fight_group_name' => 'Game Characters','category_image' => 'game-characters.jpg'],
         ];
 
         foreach ($fightGroups as $fightGroup){

@@ -16,8 +16,9 @@ class CreateFightsTable extends Migration
         Schema::create('fights', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('fight_name');
-            $table->unsignedBigInteger('fight_categories_id');
-            $table->foreign('fight_categories_id')
+            $table->string('fight_banner')->nullable();
+            $table->unsignedBigInteger('fight_category_id');
+            $table->foreign('fight_category_id')
                 ->references('id')->on('fight_categories')->onDelete('cascade');
             $table->timestamps();
         });

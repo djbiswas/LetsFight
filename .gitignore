@@ -12,3 +12,4 @@ npm-debug.log
 yarn-error.log
 task.txt
 .idea/workspace.xml
+.phpstorm.meta.php
