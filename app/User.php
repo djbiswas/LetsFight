@@ -49,4 +49,9 @@ class User extends Authenticatable
 
         return $this->hasMany(Comment::class) ;
     }
+
+
+    public function hasRole($name){
+        return $this->roles()->where('name',$name)->exists();
+    }
 }
