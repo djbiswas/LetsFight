@@ -27,7 +27,7 @@ class FightCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('fightCategory.create');
     }
 
     /**
@@ -38,7 +38,7 @@ class FightCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request->all();
     }
 
     /**
@@ -86,5 +86,10 @@ class FightCategoryController extends Controller
     public function destroy(FightCategory $fightCategory)
     {
         //
+    }
+    public function list(){
+        $i=0;
+        $fightCategories = FightCategory::orderBy('fight_group_name','asc')->paginate(10);
+        return view('fightCategory.list', compact('fightCategories','i')) ;
     }
 }
