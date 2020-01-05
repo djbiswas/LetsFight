@@ -32,7 +32,7 @@
                 <tr>
                     <td class="align-middle"> {{++$i}}</td>
                     <td class="align-middle">{{$fightCategory->fight_group_name}}</td>
-                    <td class="align-middle"><img src="{{asset('images/'.$fightCategory->category_image)}}" alt="image" class="img-thumbnail img-thumbnail-small img-fluid"></td>
+                    <td class="align-middle"><img src="{{asset('/storage/images/'.$fightCategory->category_image)}}" alt="image" class="img-thumbnail img-thumbnail-small img-fluid"></td>
                     <td class="align-middle">
                         @include('shared._action',[ 'target' => 'fightCategory', 'param' => 'fightCategory' ])
                     </td>

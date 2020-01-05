@@ -29,3 +29,38 @@ main.small-sidebar aside {
 .img-thumbnail-large{
     max-width: 640px;
 }
+
+/*DJ custome CSS*/
+
+/*Side Bar Nav*/
+.menu-hr {
+    margin: 0;
+    border-color: #262424;
+}
+
+.collapse.show{
+    background: #2f3337;
+}
+
+.nav-link.collapsed {
+    background: #343a40;
+}
+
+.nav-item a {
+    color: #b3b3b3;
+}
+
+.nav-item a:hover {
+    color: #fff;
+}
+
+
+.nav-fill .nav-item {
+    text-align: left;
+    font-size: 17px;
+}
+
+.nav-link i {
+    text-align: right;
+    float: right;
+

@@ -22,7 +22,6 @@ class FightCategorySeeder extends Seeder
         ];
 
         foreach ($fightGroups as $fightGroup){
-
             \App\FightCategory::create($fightGroup);
         }
     }

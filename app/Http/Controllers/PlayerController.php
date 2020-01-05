@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Player;
+use App\Weapon;
 use Illuminate\Http\Request;
 
 class PlayerController extends Controller
@@ -14,7 +15,9 @@ class PlayerController extends Controller
      */
     public function index()
     {
-        //
+        $i = 0;
+        $players = Player::paginate(10);
+        return view('players.index', compact('players','i'));
     }
 
     /**
@@ -24,7 +27,8 @@ class PlayerController extends Controller
      */
     public function create()
     {
-        //
+        $weapons = Weapon::pluck('name', 'id');
+        return view('players.create', compact('weapons'));
     }
 
     /**
@@ -35,7 +39,21 @@ class PlayerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'weapon_description' => 'sometimes|max:255'
+        ]);
+
+        $player = new Player();
+        $player->name = $request->name;
+        $player->weapon_description = $request->weapon_description;
+
+
+        $weapon->save();
+
+        flash('New Weapon Add Sussess')->success();
+
+        return redirect()->route('weapons.index');
     }
 
     /**
@@ -57,7 +75,8 @@ class PlayerController extends Controller
      */
     public function edit(Player $player)
     {
-        //
+        $weapons = Weapon::pluck('name', 'id');
+        return view('players.edit',compact('player','weapons'));
     }
 
     /**

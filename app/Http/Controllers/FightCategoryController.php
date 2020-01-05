@@ -15,8 +15,6 @@ class FightCategoryController extends Controller
     public function index()
     {
         $fightCategories = FightCategory::all();
-      //  return $fightCategories;
-
         return view('welcome',compact('fightCategories'));
     }
 
@@ -38,7 +36,39 @@ class FightCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->all();
+        $this->validate($request, [
+            'fight_group_name' => 'required',
+            'category_image' => 'image|mimes:jpg,jpeg,png,gif',
+            'group_note' => 'sometimes|max:255'
+        ]);
+
+        $fightCategory = new FightCategory();
+        $fightCategory->fight_group_name = $request->fight_group_name;
+        $fightCategory->group_note = $request->group_note;
+
+        if ($request->hasFile('category_image')) {
+            //get image file.
+            $image = $request->category_image;
+            //get just extension.
+            $ext = $image->getClientOriginalExtension();
+            //make a unique name
+            $filename = uniqid() . '.' . $ext;
+
+            //delete the previous image.
+            // Storage::delete("public/pics/{$projectVerified->image}");
+
+            //upload the image
+            $image->storeAs('public/images', $filename);
+
+            //this column has a default value so don't need to set it empty.
+            $fightCategory->category_image = $filename;
+        }
+
+        $fightCategory->save();
+
+        flash('New Category Add Sussess')->success();
+
+        return redirect()->route('fightCategory.index');
     }
 
     /**
@@ -50,6 +80,7 @@ class FightCategoryController extends Controller
     public function show($fightCategory)
     {
         $fightsCat = FightCategory::with('fights')->find($fightCategory);
+
      //   return $fightsCat;
        return  view('fightCategory.show', compact('fightsCat'));
     }
@@ -62,7 +93,7 @@ class FightCategoryController extends Controller
      */
     public function edit(FightCategory $fightCategory)
     {
-        //
+        return view('fightCategory.edit', compact('fightCategory'));
     }
 
     /**
@@ -74,7 +105,39 @@ class FightCategoryController extends Controller
      */
     public function update(Request $request, FightCategory $fightCategory)
     {
-        //
+        $this->validate($request, [
+            'fight_group_name' => 'required',
+            'category_image' => 'image|mimes:jpg,jpeg,png,gif',
+            'group_note' => 'sometimes|max:255'
+        ]);
+
+        $fightCategory = FightCategory::find($fightCategory->id);
+        $fightCategory->fight_group_name = $request->fight_group_name;
+        $fightCategory->group_note = $request->group_note;
+
+        if ($request->hasFile('category_image')) {
+            //get image file.
+            $image = $request->category_image;
+            //get just extension.
+            $ext = $image->getClientOriginalExtension();
+            //make a unique name
+            $filename = uniqid() . '.' . $ext;
+
+            //delete the previous image.
+            // Storage::delete("public/pics/{$projectVerified->image}");
+
+            //upload the image
+            $image->storeAs('public/images', $filename);
+
+            //this column has a default value so don't need to set it empty.
+            $fightCategory->category_image = $filename;
+        }
+
+        $fightCategory->save();
+
+        flash('New Category Add Sussess')->success();
+
+        return redirect()->route('fightCategory.index');
     }
 
     /**

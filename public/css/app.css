@@ -506,7 +506,7 @@ mark,
 }
 
 .img-fluid {
-  max-width: 100%;
+  max-width: 110%;
   height: auto;
 }
 
@@ -11355,4 +11355,6 @@ a.text-dark:focus {
     border-color: #dee2e6;
   }
 }
+
+
 

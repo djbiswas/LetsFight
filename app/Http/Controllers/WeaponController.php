@@ -14,7 +14,9 @@ class WeaponController extends Controller
      */
     public function index()
     {
-        //
+        $i = 0;
+        $weapons = Weapon::paginate(10);
+        return view('weapons.index', compact('weapons','i'));
     }
 
     /**
@@ -24,7 +26,7 @@ class WeaponController extends Controller
      */
     public function create()
     {
-        //
+        return view('weapons.create');
     }
 
     /**
@@ -35,7 +37,21 @@ class WeaponController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'weapon_description' => 'sometimes|max:255'
+        ]);
+
+        $weapon = new Weapon();
+        $weapon->name = $request->name;
+        $weapon->weapon_description = $request->weapon_description;
+
+
+        $weapon->save();
+
+        flash('New Weapon Add Sussess')->success();
+
+        return redirect()->route('weapons.index');
     }
 
     /**
@@ -57,7 +73,7 @@ class WeaponController extends Controller
      */
     public function edit(Weapon $weapon)
     {
-        //
+        return view('weapons.edit',compact('weapon'));
     }
 
     /**
@@ -69,7 +85,21 @@ class WeaponController extends Controller
      */
     public function update(Request $request, Weapon $weapon)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'weapon_description' => 'sometimes|max:255'
+        ]);
+
+        $weapon_data = Weapon::find($weapon->id);
+        $weapon_data->name = $request->name;
+        $weapon_data->weapon_description = $request->weapon_description;
+
+
+        $weapon_data->save();
+
+        flash('Weapon Update Sussess')->success();
+
+        return redirect()->route('weapons.index');
     }
 
     /**
