@@ -24,7 +24,7 @@ class FightSeeder extends Seeder
 
 
         foreach ($players as $player){
-          $fight=  [
+          $fight =  [
               'fight_name' => implode(' VS ', $player['name']),
               'fight_category_id' =>  $fightCategories->random()->id
 

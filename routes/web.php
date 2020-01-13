@@ -26,6 +26,8 @@ Route::prefix('admin')->middleware('admin')->group(function (){
     Route::get('fight-category-list', 'FightCategoryController@list')->name('fightCategory.list');
     Route::resource('weapons', 'WeaponController');
     Route::resource('players', 'PlayerController');
+    Route::resource('fights', 'FightController')->except(['show']);
+
 
 });
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\FightCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class FightCategoryController extends Controller
 {
@@ -46,6 +47,7 @@ class FightCategoryController extends Controller
         $fightCategory->fight_group_name = $request->fight_group_name;
         $fightCategory->group_note = $request->group_note;
 
+
         if ($request->hasFile('category_image')) {
             //get image file.
             $image = $request->category_image;
@@ -55,20 +57,19 @@ class FightCategoryController extends Controller
             $filename = uniqid() . '.' . $ext;
 
             //delete the previous image.
-            // Storage::delete("public/pics/{$projectVerified->image}");
-
+//            if(File::exists(public_path($player->image))){
+//                File::delete(public_path($player->image));
+//            }
             //upload the image
-            $image->storeAs('public/images', $filename);
+            $request->category_image->move(public_path('images'), $filename);
 
-            //this column has a default value so don't need to set it empty.
-            $fightCategory->category_image = $filename;
         }
 
         $fightCategory->save();
 
         flash('New Category Add Sussess')->success();
 
-        return redirect()->route('fightCategory.index');
+        return redirect()->route('fightCategory.list');
     }
 
     /**
@@ -79,9 +80,10 @@ class FightCategoryController extends Controller
      */
     public function show($fightCategory)
     {
-        $fightsCat = FightCategory::with('fights')->find($fightCategory);
+         $fightsCat = FightCategory::with('fights')->find($fightCategory);
 
-     //   return $fightsCat;
+//         return $fightsCat;
+
        return  view('fightCategory.show', compact('fightsCat'));
     }
 
@@ -115,6 +117,8 @@ class FightCategoryController extends Controller
         $fightCategory->fight_group_name = $request->fight_group_name;
         $fightCategory->group_note = $request->group_note;
 
+
+
         if ($request->hasFile('category_image')) {
             //get image file.
             $image = $request->category_image;
@@ -123,21 +127,23 @@ class FightCategoryController extends Controller
             //make a unique name
             $filename = uniqid() . '.' . $ext;
 
+
             //delete the previous image.
-            // Storage::delete("public/pics/{$projectVerified->image}");
-
+            if(File::exists(public_path($fightCategory->category_image))){
+                File::delete(public_path($fightCategory->category_image));
+            }
             //upload the image
-            $image->storeAs('public/images', $filename);
-
+            $request->category_image->move(public_path('images'), $filename);
             //this column has a default value so don't need to set it empty.
-            $fightCategory->category_image = $filename;
+            $fightCategory->category_image = 'images/'.$filename;
+
         }
 
         $fightCategory->save();
 
-        flash('New Category Add Sussess')->success();
+        flash('New Category Add Success')->success();
 
-        return redirect()->route('fightCategory.index');
+        return redirect()->route('fightCategory.list');
     }
 
     /**
@@ -146,10 +152,14 @@ class FightCategoryController extends Controller
      * @param  \App\FightCategory  $fightCategory
      * @return \Illuminate\Http\Response
      */
+
     public function destroy(FightCategory $fightCategory)
     {
-        //
+        $fightCategory->delete();
+        flash('Category Delete Success')->success();
+        return redirect()->route('fightCategory.index');
     }
+
     public function list(){
         $i=0;
         $fightCategories = FightCategory::orderBy('fight_group_name','asc')->paginate(10);

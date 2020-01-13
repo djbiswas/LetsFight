@@ -13,7 +13,7 @@ class Fight extends Model
 
     public function players(){
 
-        return $this->belongsToMany(Player::class)->using(FightPlayer::class) ;
+        return $this->belongsToMany(Player::class)->using(FightPlayer::class)->withTrashed();
     }
 
     public function votes(){

@@ -1,0 +1,37 @@
+.body{
+    background:
+        /* top, transparent red, faked with gradient */
+        linear-gradient(to right,
+        rgba(2, 0, 0, 0.5),
+        rgba(50, 0, 0, 0.45)
+        ),
+            /* bottom, image */
+        url(/images/bg.jpg);
+    background-size: cover;
+}
+
+
+
+.vs{
+    max-width: 50px !important;
+    max-height: 50px !important;
+    float: left;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.btn-vote{
+    background-color: #323232;
+}
+.pb-cmnt-container {
+    font-family: Lato;
+    margin-top: 100px;
+}
+
+.pb-cmnt-textarea {
+    resize: none;
+    height: 300px;
+    width: 100%;
+}

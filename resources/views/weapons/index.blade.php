@@ -1,6 +1,15 @@
 @extends('layouts.admin')
 @section('title', 'category List')
 
+@section('pagestyle')
+    <style>
+        .btn.btn-info.show,
+        .btn.btn-danger.delete {
+            display: none;
+        }
+    </style>
+@endsection
+
 @section('content')
 
     {{-- FightCategory start--}}

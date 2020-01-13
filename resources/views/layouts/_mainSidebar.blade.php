@@ -51,6 +51,20 @@
                 </ul>
             </div>
         </li>
+        <hr class="menu-hr">
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#fight" data-parent="#fight">Fights <i class="fa fa-caret-down"></i></a>
+            <div id="fight" class="collapse">
+                <ul class="nav flex-column ml-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('fights.index')}}">Fight List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('fights.create')}}">Set Fight</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
 
         <hr class="menu-hr">
         <li class="nav-item">

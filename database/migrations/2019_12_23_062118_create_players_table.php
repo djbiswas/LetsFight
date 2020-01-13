@@ -21,10 +21,26 @@ class CreatePlayersTable extends Migration
             $table->integer('age')->nullable();
             $table->string('from')->nullable();
             $table->string('identity')->nullable();
+            $table->string('size')->nullable();
+            $table->string('continent')->nullable();
+            $table->string('area')->nullable();
+            $table->string('speed')->nullable();
+            $table->string('attacks')->nullable();
+            $table->string('years')->nullable();
+            $table->string('role')->nullable();
+            $table->string('sport')->nullable();
+            $table->string('record')->nullable();
+            $table->string('show')->nullable();
+            $table->string('game')->nullable();
+            $table->string('debut')->nullable();
+            $table->string('type')->nullable();
             $table->string('image')->nullable();
             $table->unsignedBigInteger('weapon_id')->default('1');
             $table->foreign('weapon_id')->references('id')->on('weapons')->onUpdate('cascade');
+            $table->unsignedBigInteger('fight_category_id')->default('1');
+            $table->foreign('fight_category_id')->references('id')->on('fight_categories')->onUpdate('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

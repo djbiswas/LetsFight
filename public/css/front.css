@@ -1,0 +1,141 @@
+body{
+    background:
+        /* top, transparent red, faked with gradient */
+        linear-gradient(to right,
+        rgba(2, 0, 0, 0.5),
+        rgba(50, 0, 0, 0.45)
+        ),
+            /* bottom, image */
+        url(/images/bg.jpg) !important;
+    background-size: cover !important;
+}
+
+
+
+.vs{
+    max-width: 50px !important;
+    max-height: 50px !important;
+    float: left;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.td{
+    margin-top: 10px;
+}
+.btn-vote{
+    background-color: #323232;
+}
+.pb-cmnt-container {
+    font-family: Lato;
+    margin-top: 100px;
+}
+
+.pb-cmnt-textarea {
+    resize: none;
+    height: 300px;
+    width: 100%;
+}
+
+.phone-responsive{
+    display: none;
+}
+
+/* desktop
+p1-col
+tape-of-tail
+p2-col
+*/
+
+
+.comment:not(:nth-child(1)){
+    border-top: 1px solid gray;
+}
+
+/* Responsive Styles Smartphone Only */
+@media all and (max-width: 767px) {
+    .phone-responsive{
+        display: block;
+    }
+    .p1-col{
+        display: none;
+    }
+    .p2-col{
+        display: none;
+    }
+    .tape-of-tail{
+        display: none;
+    }
+    .desktop {
+        display: none;
+    }
+}
+
+/*dj vote*/
+.view-vote {
+    background: #fff;
+    margin-top: 2%;
+    padding: 2%;
+    border-radius: 0.25rem;
+}
+
+.comment_sec {
+    margin: 0;
+    background: #fff;
+    border-radius: 0.25rem;
+}
+
+.card-accent-dark {
+    border-top: 2px solid #636f83 !important;
+}
+
+
+/* newly added */
+/* ------------------------------------------------------------------------------------------ */
+.carousel-control-prev .prev{
+    color:#007bff;
+    transition: all .2s;
+    transform: scale(2);
+}
+.carousel-control-prev .prev:hover{
+    transform: scale(2.5);
+}
+
+.carousel-control-next .next{
+    color: #007bff;
+    transition: all .2s;
+    transform: scale(2);
+}
+.carousel-control-next .next:hover{
+    transform: scale(2.5);
+}
+
+.card-img-overlay{
+    background-color: rgba(0, 0, 0, 0.45);
+}
+
+.card{
+    transition: all .15s;
+}
+
+.card:hover{
+    transform: scale(1.1);
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.45);
+}
+
+
+.btn{
+    transition: all .15s !important;
+}
+
+.btn:hover{
+    transform: scale(1.1);
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.45);
+}
+.btn:active{
+    transform: scale(.9);
+    box-shadow: none;
+}
+
+/* ------------------------------------------------------------------------------------- */

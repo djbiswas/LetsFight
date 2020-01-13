@@ -1,6 +1,14 @@
 @extends('layouts.admin')
 @section('title', 'category List')
 
+@section('pagestyle')
+    <style>
+        .show {
+            display: none;
+        }
+    </style>
+@endsection
+
 @section('content')
 
     {{-- FightCategory start--}}
@@ -36,8 +44,8 @@
                 <tr>
                     <td class="align-middle"> {{++$i}}</td>
                     <td class="align-middle">{{$player->name}}</td>
-{{--                    <td class="align-middle"><img src="{{asset('/storage/images/'.$weapon->image)}}" alt="image" class="img-thumbnail img-thumbnail-small img-fluid"></td>--}}
                     <td class="align-middle"><img src="{{asset($player->image)}}" alt="image" class="img-thumbnail img-thumbnail-small img-fluid"></td>
+{{--                    <td class="align-middle"><img src="{{asset($player->image)}}" alt="image" class="img-thumbnail img-thumbnail-small img-fluid"></td>--}}
                     <td class="align-middle">{{$player->Height}}</td>
                     <td class="align-middle">{{$player->weight}}</td>
                     <td class="align-middle">{{$player->age}}</td>

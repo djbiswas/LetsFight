@@ -22,3 +22,74 @@
     </div>
 
 @endsection
+
+@section('scripts')
+    <script>
+        $(".animals").css("display", "none");
+        $(".history").css("display", "none");
+        $(".fighter").css("display", "none");
+        $(".celebrity").css("display", "none");
+        $(".tv").css("display", "none");
+        $(".game").css("display", "none");
+
+        function selectCat() {
+            var category_id = $("#fight_category_id").val();
+            if(category_id == 1){
+
+                $(".animals").css("display", "none");
+                $(".fighter").css("display", "none");
+                $(".celebrity").css("display", "none");
+                $(".tv").css("display", "none");
+                $(".game").css("display", "none");
+                $(".history").css("display", "block");
+
+            }
+            if(category_id == 2){
+
+                $(".fighter").css("display", "none");
+                $(".celebrity").css("display", "none");
+                $(".tv").css("display", "none");
+                $(".game").css("display", "none");
+                $(".history").css("display", "none");
+                $(".animals").css("display", "block");
+            }
+            if(category_id == 3){
+
+                $(".celebrity").css("display", "none");
+                $(".tv").css("display", "none");
+                $(".game").css("display", "none");
+                $(".history").css("display", "none");
+                $(".animals").css("display", "none");
+                $(".fighter").css("display", "block");
+            }
+            if(category_id == 4){
+
+                $(".tv").css("display", "none");
+                $(".game").css("display", "none");
+                $(".history").css("display", "none");
+                $(".animals").css("display", "none");
+                $(".fighter").css("display", "none");
+                $(".celebrity").css("display", "block");
+            }
+            if(category_id == 5){
+
+                $(".game").css("display", "none");
+                $(".history").css("display", "none");
+                $(".animals").css("display", "none");
+                $(".fighter").css("display", "none");
+                $(".celebrity").css("display", "none");
+                $(".tv").css("display", "block");
+            }
+            if(category_id == 6){
+                $(".history").css("display", "none");
+                $(".animals").css("display", "none");
+                $(".fighter").css("display", "none");
+                $(".celebrity").css("display", "none");
+                $(".tv").css("display", "none");
+                $(".game").css("display", "block");
+            }
+
+        }
+    </script>
+
+@endsection
