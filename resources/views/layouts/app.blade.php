@@ -7,7 +7,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+{{--    <title>{{ config('app.name', 'Laravel') }}</title>--}}
+        @yield('meta')
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -80,10 +81,19 @@
                 </div>
             </div>
         </nav>
-
-        <main class="py-4">
-            @yield('content')
-        </main>
     </div>
+
+        <main class="main-container">
+            @yield('content')
+            @include('flash::message')
+
+
+        </main>
+
+    <footer class=" page-footer bg-white text-center p-2 footer">
+        <p class="text-primary m-0">&copy; 2020 vsclash.com. All rights reserved.Designed and Developed By &nbsp; &nbsp;<a href="http://softxltd.com/"><img src="/images/softx.png" alt="" srcset="" width="100px"></a></p>
+
+    </footer>
+
 </body>
 </html>

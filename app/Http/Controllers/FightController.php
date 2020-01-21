@@ -6,6 +6,7 @@ use App\Comment;
 use App\Fight;
 use App\FightCategory;
 use App\Player;
+use App\Setting;
 use App\ViewVote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -54,35 +55,28 @@ class FightController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'fight_name' => 'required',
             'fight_category_id' => 'required',
             'player_1' => 'required',
-            'player_2' => 'required',
-            'fight_banner' => 'image|mimes:jpg,jpeg,png,gif'
+            'player_2' => 'required'
 
         ]);
 
-        if ($request->hasFile('fight_banner')) {
-            //get image file.
-            $image = $request->fight_banner;
-            //get just extension.
-            $ext = $image->getClientOriginalExtension();
-            //make a unique name
-            $filename = uniqid() . '.' . $ext;
+        $playerImage_1 = Player::where('id',$request->player_1)->first();
+        $playerName_1 = $playerImage_1->name;
+        $playerImage_1 = $playerImage_1->image;
 
-            //delete the previous image.
-//            if(File::exists(public_path($player->image))){
-//                File::delete(public_path($player->image));
-//            }
-            //upload the image
-            $request->fight_banner->move(public_path('images'), $filename);
 
-        }
+        $playerImage_2 = Player::where('id',$request->player_2)->first();
+        $playerName_2 = $playerImage_2->name;
+        $playerImage_2 = $playerImage_2->image;
+
+
 
         $fight =  [
-            'fight_name' => $request->fight_name,
-            'fight_category_id' =>  $request->fight_category_id,
-            'fight_banner' =>  'images/'.$filename
+            'fight_name' => $playerName_1 . ' VS ' . $playerName_2,
+            'playerImage_1' => $playerImage_1,
+            'playerImage_2' => $playerImage_2,
+            'fight_category_id' =>  $request->fight_category_id
 
         ];
 
@@ -104,6 +98,19 @@ class FightController extends Controller
      */
     public function show(Fight $fight)
     {
+        $next_fight = Fight::where('id', '>', $fight->id)->first();
+        if ($next_fight){
+            $next_fight = $next_fight->id;
+        } else{
+            $next_fight = 0;
+        }
+
+        $prv_fight = Fight::where('id', '<', $fight->id)->orderBy('id', 'DESC')->first();
+        if ($prv_fight){
+            $prv_fight = $prv_fight->id;
+        } else{
+            $prv_fight = 0;
+        }
 
 
         $cookie = ( request()->cookie(Str::slug($fight->fight_name,'-')))?: null;
@@ -114,33 +121,51 @@ class FightController extends Controller
             $c->orderBy('id', 'desc')->paginate(10);
         }]);
 
+
+
         $top_fights = Fight::take(5)->get();
         $top_votes = Fight::orderBy('id','desc')->take(5)->get();
 
         $player_1 =  $fightWithPlayers->players[0]->id;
         $player_2 =  $fightWithPlayers->players[1]->id;
 
+        $fight_votes = ViewVote::where('fight_id',$fight->id)->get();
+
+        if ($fight_votes){
+            $total_votes = 0;
+            foreach ($fight_votes as $fight_vote){
+                $total_votes = $total_votes + $fight_vote->voting;
+            }
+
+        }
+//        return $total_votes;
+
+
         $votes_1 = ViewVote::where('fight_id',$fight->id)->where('player_id',$player_1)->first();
         if ($votes_1 == ''){
             $vote_1 = 0;
         } else{
-            $vote_1 = $votes_1->voting;
+            $vote_1 =  round(($votes_1->voting / $total_votes) * 100, 2);
         }
         $votes_2 = ViewVote::where('fight_id',$fight->id)->where('player_id',$player_2)->first();
 
         if ($votes_2 == ''){
-            $vote_2 = 2;
+            $vote_2 = 0;
         } else {
-            $vote_2 = $votes_2->voting;
+            $vote_2 = round(($votes_2->voting / $total_votes) * 100, 2);
         }
 
         //$votes= ViewVote::where('fight_id',$fight->id)->get();
+
 
         $comments = Comment::with('user')
             ->where('fight_id', $fight->id)
             ->orderByDesc('id')->paginate(10);
         // return  $fightWithPlayers;
-        return view('fights.show', compact('fightWithPlayers', 'top_votes','top_fights','vote_1','vote_2','comments','cookie'));
+
+        $settings = Setting::first();
+
+        return view('fights.show', compact('fightWithPlayers', 'top_votes','top_fights','vote_1','vote_2','comments','cookie', 'next_fight', 'prv_fight','settings'));
 
     }
 
@@ -170,55 +195,43 @@ class FightController extends Controller
     public function update(Request $request, Fight $fight)
     {
         $this->validate($request, [
-            'fight_name' => 'required',
             'fight_category_id' => 'required',
             'player_1' => 'sometimes',
-            'player_2' => 'sometimes',
-            'fight_banner' => 'sometimes|image|mimes:jpg,jpeg,png,gif'
+            'player_2' => 'sometimes'
 
         ]);
 
-
-
-        if ($request->hasFile('fight_banner')) {
-            //get image file.
-            $image = $request->fight_banner;
-            //get just extension.
-            $ext = $image->getClientOriginalExtension();
-            //make a unique name
-            $filename = uniqid() . '.' . $ext;
-
-//            delete the previous image.
-            if(File::exists(public_path($fight->fight_banner))){
-                File::delete(public_path($fight->fight_banner));
-            }
-            //upload the image
-            $request->fight_banner->move(public_path('images'), $filename);
-
-            $fights =  [
-
-                'fight_name' => $request->fight_name,
-                'fight_category_id' =>  $request->fight_category_id,
-                'fight_banner' =>  'images/'.$filename
-
-            ];
+        if ($request->player_1 == ''){
+            $playerImage_1 = $fight->playerImage_1;
         } else {
-            $fights =  [
-
-                'fight_name' => $request->fight_name,
-                'fight_category_id' =>  $request->fight_category_id
-
-            ];
+            $playerImage_1 = Player::where('id',$request->player_1)->first();
+            $playerName_1 = $playerImage_1->name;
+            $playerImage_1 = $playerImage_1->image;
         }
 
-        //$fight->update($fights);
+        if ($request->player_2 == ''){
+            $playerImage_2 = $fight->playerImage_2;
+        } else {
+            $playerImage_2 = Player::where('id',$request->player_2)->first();
+            $playerName_2 = $playerImage_2->name;
+            $playerImage_2 = $playerImage_2->image;
+        }
 
-        $fightPlayers = $fight::where('id',$fight->id)->with('players')->first();
+        $fights =  [
+            'fight_name' => $playerName_1 . ' VS ' . $playerName_2,
+            'playerImage_1' => $playerImage_1,
+            'playerImage_2' => $playerImage_2,
+            'fight_category_id' =>  $request->fight_category_id
+
+        ];
+
+        $fight->update($fights);
+
+       $fightPlayers = $fight::where('id',$fight->id)->with('players')->first();
 
         if ($request->player_1){
             $player_1 = $request->player_1;
         }else{
-
             $player_1 = $fightPlayers->players[0]->id;
         }
 
@@ -228,11 +241,7 @@ class FightController extends Controller
             $player_2 = $fightPlayers->players[1]->id;
         }
 
-
-        $player = [$player_1, $player_2];
-
-
-
+       $player = [$player_1, $player_2];
 
         $fight->players()->sync($player);
 
@@ -273,5 +282,14 @@ class FightController extends Controller
              ['user_id' => auth()->id()])->all()
          );
         return redirect()->back();
+    }
+
+    public function getPlayers(Request $request){
+        if($request->ajax()){
+            $players = Player::where('fight_category_id',$request->fight_category_id)->pluck('name','id');
+            $data = view('fights.getPlayers',compact('players'))->render();
+            return response()->json(['options'=>$data]);
+        }
+
     }
 }

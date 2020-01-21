@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\FightCategory;
+use App\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -15,8 +16,9 @@ class FightCategoryController extends Controller
      */
     public function index()
     {
+        $settings = Setting::first();
         $fightCategories = FightCategory::all();
-        return view('welcome',compact('fightCategories'));
+        return view('welcome',compact('fightCategories','settings'));
     }
 
     /**
@@ -80,11 +82,10 @@ class FightCategoryController extends Controller
      */
     public function show($fightCategory)
     {
-         $fightsCat = FightCategory::with('fights')->find($fightCategory);
+        $fightsCat = FightCategory::with('fights')->find($fightCategory);
+        $settings = Setting::first();
 
-//         return $fightsCat;
-
-       return  view('fightCategory.show', compact('fightsCat'));
+       return  view('fightCategory.show', compact('fightsCat','settings'));
     }
 
     /**

@@ -34,6 +34,7 @@ class LoginController extends Controller
      *
      * @return void
      */
+
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
@@ -43,6 +44,7 @@ class LoginController extends Controller
     protected function redirectTo()
     {
      // return   ( $request->user()->hasRole('admin'))? route('home'): '/';
+        flash('Login Success')->success();
       return (Auth::user()->hasRole('admin'))? route('home'): '/';
 
     }

@@ -4,8 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
+
+    @yield('meta')
 
     <!-- Scrollbar Custom CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
@@ -44,22 +47,11 @@
                         </li>
                     </ul>
                 </li>
+
                 <hr class="menu-hr">
                 <li>
-                    <a href="#productSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Weapons</a>
-                    <ul class="collapse list-unstyled" id="productSubmenu">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('weapons.index')}}">Weapons List</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('weapons.create')}}">New Weapon</a>
-                        </li>
-                    </ul>
-                </li>
-                <hr class="menu-hr">
-                <li class="">
-                    <a href="#currencySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Players</a>
-                    <ul class="collapse list-unstyled" id="currencySubmenu">
+                    <a href="#playerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Player</a>
+                    <ul class="collapse list-unstyled" id="playerSubmenu">
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('players.index')}}">Player List</a>
                         </li>
@@ -70,8 +62,8 @@
                 </li>
                 <hr class="menu-hr">
                 <li>
-                    <a href="#saleSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Fights</a>
-                    <ul class="collapse list-unstyled" id="saleSubmenu">
+                    <a href="#fightSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Fights</a>
+                    <ul class="collapse list-unstyled" id="fightSubmenu">
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('fights.index')}}">Fight List</a>
                         </li>
@@ -80,14 +72,33 @@
                         </li>
                     </ul>
                 </li>
-
+                <hr class="menu-hr">
+                <li>
+                    <a href="#suggestion" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Suggestion</a>
+                    <ul class="collapse list-unstyled" id="suggestion">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('suggestions.index')}}">Fight Suggestions</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('suggestions.makeData')}}">Make Suggestion</a>
+                        </li>
+                    </ul>
+                </li>
+                <hr class="menu-hr">
+                <li>
+                    <a href="/support"  class="nav-link">Support</a>
+                </li>
+                <hr class="menu-hr">
+                <li>
+                    <a href="/admin/settings"  class="nav-link">Settings</a>
+                </li>
             </ul>
             <hr class="menu-hr">
             <ul class="list-unstyled CTAs">
                 <li>
                     <a class="download dropdown-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                       document.getElementById('logout-form').submit();">
                         {{ __('Logout') }}
                     </a>
 
@@ -97,7 +108,7 @@
                     {{-- <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Log Out</a>--}}
                 </li>
                 <li>
-                    <a href="/" class="article">Back to Web</a>
+                    <a href="/" class="article" target="_blank">Back to Web</a>
                 </li>
             </ul>
         </nav>
@@ -119,26 +130,38 @@
                     <div id = "top_bar" class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
 
-                            <li class="nav-item active">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                            @guest
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                                @if (Route::has('register'))
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    </li>
+                                @endif
+                            @else
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->name }} <span class="caret"></span>
                                     </a>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        @if(Auth::user()->id == 1 || Auth::user()->id == 2)
+                                            <a class="dropdown-item" href="/admin">
+                                                Admin Panel <i class="fas fa-users-cog"></i>
+                                            </a>
+                                        @endif
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                            {{--                        <li class="nav-item">--}}
-                            {{--                            <a class="nav-link" href="#">Page</a>--}}
-                            {{--                        </li>--}}
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
+                            @endguest
 
                         </ul>
                     </div>
@@ -151,6 +174,18 @@
                 @yield('content')
 
             </div>
+
+            <!-- Footer -->
+            <footer class="page-footer font-small" style="background: #343a40">
+
+                <!-- Copyright -->
+                <div class="footer-copyright text-center py-3 text-white">© 2020 Copyright:
+                    <a href="http://softxltd.com/"> SoftxLtd.com</a>
+                </div>
+                <!-- Copyright -->
+
+            </footer>
+            <!-- Footer -->
 
 
         </div>

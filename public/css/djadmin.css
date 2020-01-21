@@ -11524,9 +11524,11 @@ a.article:hover {
     right: 0;
 }
 
+
 #content-main {
     width: calc(100% - 50px);
     padding: 0% 2%;
+    min-height: calc(100vh - 160px);
 }
 
 #content.active {
@@ -11615,6 +11617,7 @@ ul ul a {
 
 #top_bar ul li.active > a, a[aria-expanded="true"] {
     background: #fff;
+    color: #000;
 }
 #sidebarCollapse {
     background: #343a40;
@@ -11624,4 +11627,13 @@ ul ul a {
 #sidebar .sidebar-header {
     height: 70px;
     background: #fff;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: 2.5rem;
+}
+
+
+.card-accent-dark {
+    border-top: 2px solid #636f83 !important;
 }

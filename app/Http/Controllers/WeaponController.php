@@ -97,7 +97,7 @@ class WeaponController extends Controller
 
         $weapon_data->save();
 
-        flash('Weapon Update Sussess')->success();
+        flash('Weapon Update Success')->success();
 
         return redirect()->route('weapons.index');
     }

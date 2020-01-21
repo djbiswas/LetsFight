@@ -135,10 +135,10 @@
 </div>
 
 
-{{Form::label('weapon_id', 'Select Weapons *')}}
-<div class="form-group mb-3">
-    {{Form::select('weapon_id', $weapons, null, ['class' => 'select2op form-control','placeholder' => 'Select Weapons', 'required'])}}
-</div>
+{{--{{Form::label('weapon_id', 'Select Weapons *')}}--}}
+{{--<div class="form-group mb-3">--}}
+{{--    {{Form::select('weapon_id', $weapons, null, ['class' => 'select2op form-control','placeholder' => 'Select Weapons', 'required'])}}--}}
+{{--</div>--}}
 
 {{Form::label('image', 'Player Image')}}
 <div class="input-group mb-3">

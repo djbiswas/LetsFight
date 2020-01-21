@@ -37,10 +37,11 @@
                 </ul>
             </div>
         </li>
+
         <hr class="menu-hr">
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#item-3" data-parent="#accordion1">Players <i class="fa fa-caret-down"></i></a>
-            <div id="item-3" class="collapse">
+            <a class="nav-link" data-toggle="collapse" href="#playersMenu" data-parent="#players">Fights <i class="fa fa-caret-down"></i></a>
+            <div id="playersMenu" class="collapse">
                 <ul class="nav flex-column ml-3">
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('players.index')}}">Player List</a>
@@ -51,6 +52,7 @@
                 </ul>
             </div>
         </li>
+
         <hr class="menu-hr">
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#fight" data-parent="#fight">Fights <i class="fa fa-caret-down"></i></a>

@@ -1,9 +1,9 @@
 @extends('layouts.admin')
-@section('title', 'category List')
+@section('title', 'Player List')
 
 @section('pagestyle')
     <style>
-        .show {
+        .action-show {
             display: none;
         }
     </style>
@@ -34,7 +34,7 @@
                 <th scope="col">Height</th>
                 <th scope="col">Weight</th>
                 <th scope="col">Age</th>
-                <th scope="col">Weapon</th>
+{{--                <th scope="col">Weapon</th>--}}
                 <th scope="col" width="210px">Action</th>
             </tr>
             </thead>
@@ -44,12 +44,12 @@
                 <tr>
                     <td class="align-middle"> {{++$i}}</td>
                     <td class="align-middle">{{$player->name}}</td>
-                    <td class="align-middle"><img src="{{asset($player->image)}}" alt="image" class="img-thumbnail img-thumbnail-small img-fluid"></td>
+                    <td class="align-middle"><img src="{{asset($player->image)}}" alt="image" class="img-thumbnail img-thumbnail-small img-fluid" width="100px"></td>
 {{--                    <td class="align-middle"><img src="{{asset($player->image)}}" alt="image" class="img-thumbnail img-thumbnail-small img-fluid"></td>--}}
                     <td class="align-middle">{{$player->Height}}</td>
                     <td class="align-middle">{{$player->weight}}</td>
                     <td class="align-middle">{{$player->age}}</td>
-                    <td class="align-middle">{{$player->weapon->name}}</td>
+{{--                    <td class="align-middle">{{$player->weapon->name}}</td>--}}
                     <td class="align-middle">
                         @include('shared._action',[ 'target' => 'players', 'param' => 'player' ])
                     </td>
@@ -68,4 +68,4 @@
 
 
 
-@stop
+@endsection

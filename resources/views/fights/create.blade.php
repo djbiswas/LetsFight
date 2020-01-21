@@ -24,7 +24,28 @@
 
     </div>
 
+@endsection
 
+@section('scripts')
 
+    <script type="text/javascript">
 
-@stop
+        $("select[name='fight_category_id']").change(function(){
+            var fight_category_id = $(this).val();
+            var token = $("input[name='_token']").val();
+            $.ajax({
+                url: "{{route('getPlayers')}}",
+                method: 'POST',
+                data: {fight_category_id:fight_category_id, _token:token},
+                success: function(data) {
+                    $("select[name='player_1'").html('');
+                    $("select[name='player_1'").html(data.options);
+
+                    $("select[name='player_2'").html('');
+                    $("select[name='player_2'").html(data.options);
+                }
+            });
+        });
+
+    </script>
+@endsection

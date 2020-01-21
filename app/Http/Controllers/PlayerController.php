@@ -66,7 +66,7 @@ class PlayerController extends Controller
             'type' => 'sometimes',
             'identity' => 'sometimes',
             'fight_category_id' => 'sometimes',
-            'weapon_id' => 'required',
+            'weapon_id' => 'sometimes',
             'image' => 'image|mimes:jpg,jpeg,png,gif'
         ]);
 
@@ -140,8 +140,9 @@ class PlayerController extends Controller
      */
     public function edit(Player $player)
     {
+        $categories = FightCategory::pluck('fight_group_name','id');
         $weapons = Weapon::pluck('name', 'id');
-        return view('players.edit',compact('player','weapons'));
+        return view('players.edit',compact('player','weapons','categories'));
     }
 
     /**
@@ -176,7 +177,7 @@ class PlayerController extends Controller
             'type' => 'sometimes',
             'identity' => 'sometimes',
             'fight_category_id' => 'sometimes',
-            'weapon_id' => 'required',
+            'weapon_id' => 'sometimes',
             'image' => 'sometimes|image|mimes:jpg,jpeg,png,gif'
         ]);
 

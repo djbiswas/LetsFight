@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Suggestion;
 use Illuminate\Http\Request;
 
@@ -14,7 +13,16 @@ class SuggestionController extends Controller
      */
     public function index()
     {
-        //
+        $i = 0;
+        $suggestions = Suggestion::where('type','fight')->paginate(10);
+        return view('suggestions.index', compact('suggestions','i'));
+    }
+
+    public function makeData()
+    {
+        $i = 0;
+        $suggestions = Suggestion::where('type','new')->paginate(10);
+        return view('suggestions.makeData', compact('suggestions','i'));
     }
 
     /**
@@ -35,7 +43,28 @@ class SuggestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'type' => 'required',
+            'player_one' => 'sometimes|max:255',
+            'player_two' => 'sometimes|max:255',
+            'description' => 'sometimes|max:255',
+            'email' => 'sometimes|max:255',
+            'problem' => 'sometimes|max:255'
+        ]);
+
+        $suggestion = new Suggestion();
+        $suggestion->type = $request->type;
+        $suggestion->player_one = $request->player_one;
+        $suggestion->player_two = $request->player_two;
+        $suggestion->description = $request->description;
+        $suggestion->email = $request->email;
+        $suggestion->problem = $request->problem;
+
+        $suggestion->save();
+
+        flash('Your Suggestion send Success')->success();
+
+        return redirect()->route('fightCategory.index');
     }
 
     /**
@@ -82,4 +111,7 @@ class SuggestionController extends Controller
     {
         //
     }
+
+
+
 }
