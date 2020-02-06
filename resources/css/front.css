@@ -1,16 +1,8 @@
 .body{
-    background:
-        /* top, transparent red, faked with gradient */
-        linear-gradient(to right,
-        rgba(2, 0, 0, 0.5),
-        rgba(50, 0, 0, 0.45)
-        ),
-            /* bottom, image */
-        url(/images/bg.jpg);
+    background: url(/images/bg.jpg);
     background-size: cover;
+    background-position: center !important;
 }
-
-
 
 .vs{
     max-width: 50px !important;

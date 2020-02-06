@@ -30,6 +30,7 @@
             <tr>
                 <th scope="col">No</th>
                 <th scope="col">Name</th>
+                <th scope="col">Player Category</th>
                 <th scope="col">Image</th>
                 <th scope="col">Height</th>
                 <th scope="col">Weight</th>
@@ -44,6 +45,7 @@
                 <tr>
                     <td class="align-middle"> {{++$i}}</td>
                     <td class="align-middle">{{$player->name}}</td>
+                    <td class="align-middle">{{$player->fightCategory->fight_group_name ?? ''}}</td>
                     <td class="align-middle"><img src="{{asset($player->image)}}" alt="image" class="img-thumbnail img-thumbnail-small img-fluid" width="100px"></td>
 {{--                    <td class="align-middle"><img src="{{asset($player->image)}}" alt="image" class="img-thumbnail img-thumbnail-small img-fluid"></td>--}}
                     <td class="align-middle">{{$player->Height}}</td>

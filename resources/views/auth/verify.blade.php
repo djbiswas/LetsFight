@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('meta')
+    <meta name="description" content="Who would win in a fight?  You decide!  Vote on hundreds of fantasy fights ranging from animals to celebrities to cartoon characters.">
+@endsection
 
 @section('content')
 <div class="container">

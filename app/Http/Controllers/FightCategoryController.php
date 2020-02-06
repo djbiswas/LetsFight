@@ -41,7 +41,7 @@ class FightCategoryController extends Controller
     {
         $this->validate($request, [
             'fight_group_name' => 'required',
-            'category_image' => 'image|mimes:jpg,jpeg,png,gif',
+            'category_image' => 'required|image|mimes:jpg,jpeg,png,gif',
             'group_note' => 'sometimes|max:255'
         ]);
 
@@ -58,12 +58,15 @@ class FightCategoryController extends Controller
             //make a unique name
             $filename = uniqid() . '.' . $ext;
 
+
             //delete the previous image.
-//            if(File::exists(public_path($player->image))){
-//                File::delete(public_path($player->image));
-//            }
+            //   if(File::exists(public_path($fightCategory->category_image))){
+            //    File::delete(public_path($fightCategory->category_image));
+            //     }
             //upload the image
             $request->category_image->move(public_path('images'), $filename);
+            //this column has a default value so don't need to set it empty.
+            $fightCategory->category_image = 'images/'.$filename;
 
         }
 
@@ -158,7 +161,7 @@ class FightCategoryController extends Controller
     {
         $fightCategory->delete();
         flash('Category Delete Success')->success();
-        return redirect()->route('fightCategory.index');
+        return redirect()->route('fightCategory.list');
     }
 
     public function list(){

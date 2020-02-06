@@ -17,7 +17,26 @@
     <div class="row justify-content-between mb-4 mx-5 pb-3 fightCategory">
         <div class="col">
             {{ Form::model($fightCategory, ['route' => ['fightCategory.update', $fightCategory->id], 'method' => 'put','enctype' => 'multipart/form-data']) }}
-            @include('fightCategory._categoryForm')
+            <div class="input-group mb-3">
+                {{Form::text('fight_group_name', null, array('class' => 'form-control', 'placeholder' => 'Fight Group Name', 'required'  ))}}
+            </div>
+
+            {{Form::label('category_image', 'Fight Category Image')}}
+            <div class="input-group mb-3">
+                {{Form::file('category_image', array('class' => 'form-control'  ))}}
+            </div>
+
+            {{Form::label('group_note', 'Group Note')}}
+            <div class="input-group mb-3">
+                {{Form::textarea('group_note', null, array('class' => 'form-control', 'placeholder' => 'Group Note. . . .'  ))}}
+            </div>
+
+            <hr>
+            <div class="text-right">
+
+                {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}
+            </div>
+            {{ Form::close() }}
         </div>
 
     </div>

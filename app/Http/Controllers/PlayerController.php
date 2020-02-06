@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Player;
+use App\Setting;
 use App\Weapon;
 use App\FightCategory;
 use Illuminate\Http\Request;
@@ -17,10 +18,11 @@ class PlayerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $i = 0;
-        $players = Player::paginate(10);
+        $players = Player::with('fightCategory')->paginate(10);
         //return $players;
         return view('players.index', compact('players','i'));
     }
@@ -30,6 +32,7 @@ class PlayerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
         $categories = FightCategory::pluck('fight_group_name','id');
@@ -43,6 +46,7 @@ class PlayerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -94,7 +98,6 @@ class PlayerController extends Controller
         $player->weapon_id = $request->weapon_id;
 
 
-
         if ($request->hasFile('image')) {
             //get image file.
             $image = $request->image;
@@ -113,7 +116,6 @@ class PlayerController extends Controller
             $player->image = 'images/'.$filename;
         }
 
-
         $player->save();
 
         flash('New Player Add Success')->success();
@@ -127,9 +129,12 @@ class PlayerController extends Controller
      * @param  \App\Player  $player
      * @return \Illuminate\Http\Response
      */
+
     public function show(Player $player)
     {
-        //
+        $players = Player::with('fights')->with('fightCategory')->find($player->id);
+        $settings = Setting::first();
+        return  view('players.show', compact('players','settings'));
     }
 
     /**
@@ -213,9 +218,9 @@ class PlayerController extends Controller
             $filename = uniqid() . '.' . $ext;
 
             //delete the previous image.
-            if(File::exists(public_path($player->image))){
-                File::delete(public_path($player->image));
-            }
+//            if(File::exists(public_path($player->image))){
+//                File::delete(public_path($player->image));
+//            }
             //upload the image
             $request->image->move(public_path('images'), $filename);
             //this column has a default value so don't need to set it empty.

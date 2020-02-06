@@ -8,6 +8,7 @@ use App\FightCategory;
 use App\Player;
 use App\Setting;
 use App\ViewVote;
+use App\Vote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -96,16 +97,19 @@ class FightController extends Controller
      * @param  \App\Fight  $fight
      * @return \Illuminate\Http\Response
      */
-    public function show(Fight $fight)
+    public function show($fightCategory, Fight $fight)
     {
-        $next_fight = Fight::where('id', '>', $fight->id)->first();
+        $fightCatName = FightCategory::where('id',$fight->fight_category_id)->first();
+        $fightCatName = str_slug($fightCatName->fight_group_name,"-");
+
+        $next_fight = Fight::where('fight_category_id',$fight->fight_category_id)->where('id', '>', $fight->id)->first();
         if ($next_fight){
             $next_fight = $next_fight->id;
         } else{
             $next_fight = 0;
         }
 
-        $prv_fight = Fight::where('id', '<', $fight->id)->orderBy('id', 'DESC')->first();
+        $prv_fight = Fight::where('fight_category_id',$fight->fight_category_id)->where('id', '<', $fight->id)->orderBy('id', 'DESC')->first();
         if ($prv_fight){
             $prv_fight = $prv_fight->id;
         } else{
@@ -123,8 +127,8 @@ class FightController extends Controller
 
 
 
-        $top_fights = Fight::take(5)->get();
-        $top_votes = Fight::orderBy('id','desc')->take(5)->get();
+        $top_fights = Fight::with('fightCategory')->take(5)->get();
+        $top_votes = Fight::with('fightCategory')->orderBy('id','desc')->take(5)->get();
 
         $player_1 =  $fightWithPlayers->players[0]->id;
         $player_2 =  $fightWithPlayers->players[1]->id;
@@ -145,14 +149,14 @@ class FightController extends Controller
         if ($votes_1 == ''){
             $vote_1 = 0;
         } else{
-            $vote_1 =  round(($votes_1->voting / $total_votes) * 100, 2);
+            $vote_1 =  round(($votes_1->voting / $total_votes) * 100, 0);
         }
         $votes_2 = ViewVote::where('fight_id',$fight->id)->where('player_id',$player_2)->first();
 
         if ($votes_2 == ''){
             $vote_2 = 0;
         } else {
-            $vote_2 = round(($votes_2->voting / $total_votes) * 100, 2);
+            $vote_2 = round(($votes_2->voting / $total_votes) * 100, 0);
         }
 
         //$votes= ViewVote::where('fight_id',$fight->id)->get();
@@ -165,7 +169,7 @@ class FightController extends Controller
 
         $settings = Setting::first();
 
-        return view('fights.show', compact('fightWithPlayers', 'top_votes','top_fights','vote_1','vote_2','comments','cookie', 'next_fight', 'prv_fight','settings'));
+        return view('fights.show', compact('fightWithPlayers', 'top_votes','top_fights','vote_1','vote_2','comments','cookie', 'next_fight', 'prv_fight','settings','fightCatName'));
 
     }
 
@@ -203,6 +207,8 @@ class FightController extends Controller
 
         if ($request->player_1 == ''){
             $playerImage_1 = $fight->playerImage_1;
+            $playerName_1 = Player::where('image',$fight->playerImage_1)->first();
+            $playerName_1 = $playerName_1->name;
         } else {
             $playerImage_1 = Player::where('id',$request->player_1)->first();
             $playerName_1 = $playerImage_1->name;
@@ -211,6 +217,8 @@ class FightController extends Controller
 
         if ($request->player_2 == ''){
             $playerImage_2 = $fight->playerImage_2;
+            $playerName_2 = Player::where('image',$fight->playerImage_2)->first();
+            $playerName_2 = $playerName_2->name;
         } else {
             $playerImage_2 = Player::where('id',$request->player_2)->first();
             $playerName_2 = $playerImage_2->name;
@@ -264,6 +272,13 @@ class FightController extends Controller
     }
 
     public function addVote(Request $request, Fight $fight, $player){
+
+        $voat_check = Vote::where('fight_id',$fight->id)->where('visitor_ip',$request->ip())->first();
+
+        if($voat_check){
+            //flash('You can vote once.')->success();
+            return back();
+        }
 
         $cookieName= Str::slug($fight->fight_name,'-') ;
         $client_ip = $request->ip();

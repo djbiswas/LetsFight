@@ -37,7 +37,12 @@
                     <td class="align-middle">{{$fight->players[0]->name}}</td>
                     <td class="align-middle">{{$fight->players[1]->name}}</td>
                     <td class="align-middle">
-                        @include('shared._action',[ 'target' => 'fights', 'param' => 'fight' ])
+                        <a class="btn btn-info show action-show" target="_blank" href="{{route('fights.show', [ str_slug($fight->fightCategory->fight_group_name, "-"), $fight->id])}}">Show</a>
+                        <a class="btn btn-primary edit action-edit" href="{{route('fights.edit', $fight->id)}}">Edit</a>
+                        {!! Form::open(['method' => 'DELETE','route' => ['fights.destroy',  $fight->id],'style'=>'display:inline', 'class'=>'delete-item']) !!}
+
+                        {!! Form::submit('Delete', ['class' => 'btn btn-danger delete action-delete']) !!}
+                        {!! Form::close() !!}
                     </td>
                 </tr>
             @endforeach

@@ -1,26 +1,41 @@
 body{
-    background:
-        /* top, transparent red, faked with gradient */
-        linear-gradient(to right,
-        rgba(2, 0, 0, 0.5),
-        rgba(50, 0, 0, 0.45)
-        ),
-            /* bottom, image */
-        url('/images/bg.jpg') !important;
+    background: url('/images/bg.jpg') !important;
     background-size: cover !important;
+    background-position: center !important;
 }
 
+/*.vs{*/
+/*    max-width: 50px !important;*/
+/*    max-height: 50px !important;*/
+/*    float: left;*/
+/*    position: absolute;*/
+/*    top: 50%;*/
+/*    left: 50%;*/
+/*    transform: translate(-50%,-50%);*/
+/*}*/
+
 .vs{
-    max-width: 50px !important;
-    max-height: 50px !important;
-    float: left;
+    font-size: 2rem;
+    font-weight: 900;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
+    color: #fff;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    font-family: Arial, Helvetica, sans-serif;
 }
+
+.player{
+   position: relative;
+}
+
+
+
 .td{
     margin-top: 10px;
+    width: 33%;
 }
 .btn-vote{
     background-color: #323232;
@@ -54,7 +69,7 @@ body{
 }
 
 .card-img-overlay{
-    background-color: rgba(0, 0, 0, 0.45);
+    /*background-color: rgba(0, 0, 0, 0.45);*/
 }
 
 .btn{
@@ -182,4 +197,28 @@ body .main-container .container .fight--category {
 .custom-pagi-m{
     height: 4rem;
 }
+
+.sug-fight .h6 {
+    line-height: 40px;
+    margin-bottom: 0;
+}
+
+* {
+    font-weight: bolder !important;
+}
+
+/*login css*/
+.login_mid {
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+    height: 100%;
+    min-height: calc(100vh - 120px);
+}
+
+.main-container{
+    background-color: rgba(0, 0, 0, 0.35);
+    padding-top: 2%;
+}
+
 

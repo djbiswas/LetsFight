@@ -34,6 +34,7 @@
 
         function selectCat() {
             var category_id = $("#fight_category_id").val();
+
             if(category_id == 1){
 
                 $(".animals").css("display", "none");
@@ -88,7 +89,6 @@
                 $(".tv").css("display", "none");
                 $(".game").css("display", "block");
             }
-
         }
     </script>
 

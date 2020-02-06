@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class SettingController extends Controller
 {
@@ -37,6 +38,39 @@ class SettingController extends Controller
     public function store(Request $request)
     {
         //
+    }
+
+    public function bgc(Request $request)
+    {
+
+        $this->validate($request, [
+            'image' => 'required|image|mimes:jpg,jpeg,png,gif'
+        ]);
+
+        if ($request->hasFile('image')) {
+            //get image file.
+            $image = $request->image;
+            //get just extension.
+            $ext = $image->getClientOriginalExtension();
+            //make a unique name
+           // $filename = uniqid() . '.' . $ext;
+            $filename = 'bg.jpg';
+
+            //delete the previous image.
+            if(File::exists(public_path('images/bg.jpg'))){
+                File::delete(public_path('images/bg.jpg'));
+            }
+
+            //upload the image
+            $request->image->move(public_path('images'), $filename);
+
+            //this column has a default value so don't need to set it empty.
+            //$player->image = 'images/bg.jpg'.$filename;
+        }
+
+        flash('Background Image Chanced')->success();
+
+        return redirect()->route('settings.index');
     }
 
     /**
@@ -74,6 +108,7 @@ class SettingController extends Controller
             'title' => 'required',
             'description' => 'required',
             'keywords' => 'required',
+            'meta_verify' => 'sometimes',
             'facebook' => 'sometimes',
             'twitter' => 'sometimes',
             'instagram' => 'sometimes',
@@ -85,6 +120,7 @@ class SettingController extends Controller
         $settings = Setting::find(1);
         $settings->title = $request->title;
         $settings->description = $request->description;
+        $settings->meta_verify = $request->meta_verify;
         $settings->keywords = $request->keywords;
         $settings->facebook = $request->facebook;
         $settings->twitter = $request->twitter;

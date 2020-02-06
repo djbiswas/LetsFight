@@ -7,7 +7,7 @@
             <h3>Fight Management</h3>
         </div>
         <div class="col text-right">
-            <a class="btn btn-primary" href="{{route('players.index')}}"> <i class="fas fa-user-plus"></i> Back To List</a>
+            <a class="btn btn-primary" href="{{route('fights.index')}}"> <i class="fas fa-user-plus"></i> Back To List</a>
             {{--  <a class="btn btn-dark" href="{{ URL::previous() }}">Go Back</a>--}}
         </div>
     </div>

@@ -13,7 +13,7 @@
 
 {{Form::label('group_note', 'Group Note')}}
 <div class="input-group mb-3">
-    {{Form::textarea('group_note', null, array('class' => 'form-control', 'placeholder' => 'Group Note. . . .', 'required'  ))}}
+    {{Form::textarea('group_note', null, array('class' => 'form-control', 'placeholder' => 'Group Note. . . .'  ))}}
 </div>
 
 <hr>

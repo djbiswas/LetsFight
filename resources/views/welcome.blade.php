@@ -5,6 +5,10 @@
     <meta name="keywords" content="{{ $settings->keywords }}">
 @endsection
 
+@section('end_head')
+    {!! $settings->meta_verify !!}
+@endsection
+
 @section('content')
     <div class="container">
         <div class="mt-2">@include('flash::message')</div>
@@ -24,7 +28,7 @@
                 <div class="col-lg-4 col-md-6 col-sm-12 mb-5">
                     <a href="{{route('fightCategory.show', $fightCategory)}}">
                         <div class="card">
-                            <img class="card-img-top card-i" src="{{asset($fightCategory->category_image)}}" alt="Card image cap">
+                            <img class="card-img-top card-i" src="{{asset($fightCategory->category_image)}}" alt="Card image cap" style="width: auto; height: 240px;">
                             <div class="card-img-overlay text-white">
                                 <h5 class="card-title">{{$fightCategory->fight_group_name}}</h5>
                             </div>
@@ -50,23 +54,22 @@
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-3" >
                         <div class="card text-center">
                             <div class="card-header">
-                                <h3>Suggest A Fight</h3>
+                                <h3>Suggest a Fight</h3>
                             </div>
                             {!! Form::open(['route' => 'suggestions.store', 'method' => 'post' ]) !!}
                             {{Form::text('type', 'fight', array('class' => 'form-control ml-1', 'required', 'hidden'  ))}}
                                 <div class="card-body">
-                                    <div class="mb-2 sug-fight">
+                                    <div class=" sug-fight">
                                         <div class="input-group mb-3">
-                                            {{Form::text('player_one', null, array('class' => 'form-control ml-1', 'placeholder' => 'Player One', 'required'  ))}}
+                                            {{Form::text('player_one', null, array('class' => 'form-control mr-1', 'placeholder' => 'Player One', 'required'  ))}}
                                         </div>
-                                        <h4 class="card-title">VS</h4>
+                                        <h4 class="h6">VS</h4>
                                         <div class="input-group mb-3">
                                             {{Form::text('player_two', null, array('class' => 'form-control ml-1', 'placeholder' => 'Player Two', 'required'  ))}}
                                         </div>
                                     </div>
-                                    <h4>Description</h4>
                                     <div class="input-group mb-3">
-                                        {{Form::textarea('description', null, array('class' => 'form-control', 'placeholder' => 'Description', 'required'  ))}}
+                                        {{Form::textarea('description', null, array('rows'=>'5','class' => 'form-control', 'placeholder' => 'Description', 'required'  ))}}
                                     </div>
                                     {{Form::submit('Submit', ['class' => 'btn btn-secondary rounded-sm mt-2'])}}
                                 </div>
@@ -74,7 +77,7 @@
                         </div>
                     </div>
                     <!-- make a sugestion -->
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12" >
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-3" >
                         {!! Form::open(['route' => 'suggestions.store', 'method' => 'post' ]) !!}
                         {{Form::text('type', 'new', array('class' => 'form-control ml-1', 'required', 'hidden'  ))}}
                         <div class="card text-center mb-4">
@@ -86,9 +89,8 @@
                                     <div class="input-group mb-3">
                                         {{Form::email('email', null, array('class' => 'form-control', 'placeholder' => 'Your Email', 'required'  ))}}
                                     </div>
-                                    <h4>Your Suggestion</h4>
                                     <div class="input-group mb-3">
-                                        {{Form::textarea('problem', null, array('class' => 'form-control', 'placeholder' => 'Your Suggestion', 'required'  ))}}
+                                        {{Form::textarea('problem', null, array('rows'=>'5','class' => 'form-control', 'placeholder' => 'Your Suggestion', 'required' ))}}
                                     </div>
                                     {{Form::submit('Submit', ['class' => 'btn btn-secondary rounded-sm mt-2'])}}
 
@@ -104,7 +106,7 @@
                     <div class="card text-center mb-3">
 
                         <div class="card-header">
-                            <h3>Our Social Medias</h3>
+                            <h3>Our Social Media</h3>
                         </div>
                         <div class="card-body d-flex justify-content-around">
                             <a href="{{$settings->facebook}}"><i class="fab fa-facebook" style="font-size: 32px;"></i></a>

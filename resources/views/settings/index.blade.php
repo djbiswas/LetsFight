@@ -17,6 +17,40 @@
                 </div>
 
                 <div class="card-body text-dark">
+                    <div class="card-header card-accent-dark text-center mt-2 mb-2"><h4>Background Image</h4></div>
+                    <div class="row">
+                        <div class="col">
+                            Now: <img src="/images/bg.jpg" alt="" width="400">
+                        </div>
+                        <div class="col" style="margin: auto">
+                              {!!  Form::open(['route' => 'settings.bgc','method' => 'post', 'enctype' => 'multipart/form-data'])  !!}
+                                  @csrf
+
+                              <!-- Image Input Form -->
+                                  <div class="form-group">
+                                      {{Form::label('image','Background Image:') }}<br>
+                                      {{Form::file('image', null) }}
+                                      @error('image')
+                                      <span class="text-danger">{{ $message }}</span>
+                                      @enderror
+                                      <p class="help-block"></p>
+                                  </div>
+
+                                  <div class="text-center">
+                                      <!-- Submit Button Form -->
+                                      {{Form::submit('Submit', ['class' => 'btn btn-primary']) }}
+                                  </div>
+
+
+                                  {!! Form::close() !!}
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="card-body text-dark">
                     <ul class="list-group list-group-flush">
                         {!! Form::model($settings,['method' =>'PATCH', 'route' => ['settings.update', 1]])  !!}
                         {{csrf_field()}}
@@ -45,6 +79,13 @@
                             {{Form::label('description','Meta Description:') }}
                             {{Form::textarea('description', null, ['class' => 'form-control', 'rows' =>10, 'placeholder' => 'Meta Description', 'required']) }}
                         </div>
+
+                        <!-- Meta_verify Input Form -->
+                        <div class="form-group">
+                            {{Form::label('meta_verify','Meta Script for verify:') }}
+                            {{Form::textarea('meta_verify', null, ['class' => 'form-control', 'rows' =>10, 'placeholder' => 'Meta Script for verify']) }}
+                        </div>
+
 
                     <!-- Facebook Input Form -->
                             <div class="card-header card-accent-dark text-center mt-2 mb-2"><h4>Social</h4></div>

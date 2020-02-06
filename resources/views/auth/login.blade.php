@@ -1,6 +1,9 @@
 @extends('layouts.app')
-
+@section('meta')
+    <meta name="description" content="Who would win in a fight?  You decide!  Vote on hundreds of fantasy fights ranging from animals to celebrities to cartoon characters.">
+@endsection
 @section('content')
+<div class="login_mid">
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -69,5 +72,7 @@
             </div>
         </div>
     </div>
+</div>
+
 </div>
 @endsection

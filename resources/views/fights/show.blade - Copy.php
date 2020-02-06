@@ -22,16 +22,13 @@
                     <div class="col-lg-4 col-md-4 p1-col mb-2 ">
                         <div class="btn-lg btn-primary btn-block mb-2 d-none">Player 1 </div>
                         <div class="card">
-                             <a href="/players/{{$fightWithPlayers->players[0]->id}}">
-                                    <img class="card-img-top card-i" src="/{{ $fightWithPlayers->players[0]->image}}" alt="Card image cap">
-
-                                <div class="card-body">
-                                    <p class="h4 text-center ">{{ $fightWithPlayers->players[0]->name }}</p>
-                                </div>
-                            </a>
+                            <img class="card-img-top card-i" src="/{{ $fightWithPlayers->players[0]->image}}" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="h4 text-center ">{{ $fightWithPlayers->players[0]->name }}</p>
+                            </div>
                         </div>
                         @if( !is_null($cookie))
-                            <h2 class="text-center view-vote text-white mt-2 font-weight-bolder"><span class="num-count">{{ ($vote_1)?: 0 }}</span> % </h2>
+                            <h2 class="text-center view-vote text-white mt-2 font-weight-bolder">{{ ($vote_1)?: 0 }} % </h2>
                         @else
                             <form method="post" action="{{ route('fights.addVote', [$fightWithPlayers->id, $fightWithPlayers->players[0]->id] )
                         }}">
@@ -52,141 +49,158 @@
                             <div class="btn-block btn-secondary"><h5>Tale of Tape</h5></div>
                             <div class="text-center">
                                 {{-- Nationality --}}
-                                @if ($fightWithPlayers->players[0]->from != '' || $fightWithPlayers->players[1]->from != '')
-
                                 <div class="tc d-flex justify-content-around align-items-center">
                                     <div class="td">{{$fightWithPlayers->players[0]->from}}</div>
+                                    @if ($fightWithPlayers->players[0]->from != '' || $fightWithPlayers->players[1]->from != '')
                                         <div class="td">Nationality</div>
+                                    @endif
                                     <div class="td">{{$fightWithPlayers->players[1]->from}}</div>
                                 </div>
-                                @endif
-
                                 {{-- Height --}}
-                                @if ($fightWithPlayers->players[0]->Height != '' || $fightWithPlayers->players[1]->Height != '')
-
                                 <div class="tc d-flex justify-content-around align-items-center">
                                     <div class="td">{{$fightWithPlayers->players[0]->Height}}</div>
+                                    @if ($fightWithPlayers->players[0]->Height != '' || $fightWithPlayers->players[1]->Height != '')
                                         <div class="td">Height</div>
+                                    @endif
                                     <div class="td">{{$fightWithPlayers->players[1]->Height}}</div>
+
+
+
                                 </div>
-                                @endif
-
                                 {{-- Weight --}}
-                                @if ($fightWithPlayers->players[0]->weight != '' || $fightWithPlayers->players[1]->weight != '')
-
                                 <div class="tc d-flex justify-content-around align-items-center">
                                     <div class="td">{{$fightWithPlayers->players[0]->weight}}</div>
+                                    @if ($fightWithPlayers->players[0]->weight != '' || $fightWithPlayers->players[1]->weight != '')
                                         <div class="td">Weight</div>
+                                    @endif
                                     <div class="td">{{$fightWithPlayers->players[1]->weight}}</div>
+
+
+
                                 </div>
-                                @endif
-
                                 {{-- Age --}}
-                                @if ($fightWithPlayers->players[0]->age != '' || $fightWithPlayers->players[1]->age != '')
-
                                 <div class="tc d-flex justify-content-around align-items-center">
 
                                     <div class="td">{{$fightWithPlayers->players[0]->age}}</div>
+                                    @if ($fightWithPlayers->players[0]->age != '' || $fightWithPlayers->players[1]->age != '')
                                         <div class="td">Age</div>
+                                    @endif
                                     <div class="td">{{$fightWithPlayers->players[1]->age}}</div>
+
+
+
                                 </div>
-                                @endif
-
                                 {{-- Size --}}
-                                @if ($fightWithPlayers->players[0]->size != '' || $fightWithPlayers->players[1]->size != '')
-
                                 <div class="tc d-flex justify-content-around align-items-center">
 
                                     <div class="td">{{$fightWithPlayers->players[0]->size}}</div>
+                                    @if ($fightWithPlayers->players[0]->size != '' || $fightWithPlayers->players[1]->size != '')
                                         <div class="td">Size</div>
+                                    @endif
                                     <div class="td">{{$fightWithPlayers->players[1]->size}}</div>
+
+
+
                                 </div>
-                                @endif
-
                                 {{-- Continent --}}
-                                @if ($fightWithPlayers->players[0]->continent != '' || $fightWithPlayers->players[1]->continent != '')
-
                                 <div class="tc d-flex justify-content-around align-items-center">
 
                                     <div class="td">{{$fightWithPlayers->players[0]->continent}}</div>
+                                    @if ($fightWithPlayers->players[0]->continent != '' || $fightWithPlayers->players[1]->continent != '')
                                         <div class="td">Continent</div>
+                                    @endif
                                     <div class="td">{{$fightWithPlayers->players[1]->continent}}</div>
+
+
+
                                 </div>
-                                @endif
-
                                 {{-- Area --}}
-                                @if ($fightWithPlayers->players[0]->area != '' || $fightWithPlayers->players[1]->area != '')
-
                                 <div class="tc d-flex justify-content-around align-items-center">
 
                                     <div class="td">{{$fightWithPlayers->players[0]->area}}</div>
+                                    @if ($fightWithPlayers->players[0]->area != '' || $fightWithPlayers->players[1]->area != '')
                                         <div class="td">Area</div>
+                                    @endif
                                     <div class="td">{{$fightWithPlayers->players[1]->area}}</div>
+
+
+
                                 </div>
-                                @endif
-
                                 {{-- Speed --}}
-                                @if ($fightWithPlayers->players[0]->speed != '' || $fightWithPlayers->players[1]->area != '')
-
                                 <div class="tc d-flex justify-content-around align-items-center">
 
                                     <div class="td">{{$fightWithPlayers->players[0]->speed}}</div>
+                                    @if ($fightWithPlayers->players[0]->speed != '' || $fightWithPlayers->players[1]->area != '')
                                         <div class="td">Speed</div>
+                                    @endif
                                     <div class="td">{{$fightWithPlayers->players[1]->speed}}</div>
-                                </div>
-                                @endif
 
+
+
+                                </div>
                                 {{-- Attacks --}}
-                                @if ($fightWithPlayers->players[0]->attacks != '' || $fightWithPlayers->players[1]->attacks != '')
-
                                 <div class="tc d-flex justify-content-around align-items-center">
+
                                     <div class="td">{{$fightWithPlayers->players[0]->attacks}}</div>
+                                    @if ($fightWithPlayers->players[0]->attacks != '' || $fightWithPlayers->players[1]->attacks != '')
                                         <div class="td">Attacks</div>
+                                    @endif
                                     <div class="td">{{$fightWithPlayers->players[1]->attacks}}</div>
-                                </div>
-                                @endif
 
+
+
+                                </div>
                                 {{-- Years --}}
-                                @if ($fightWithPlayers->players[0]->years != '' || $fightWithPlayers->players[1]->years != '')
-
                                 <div class="tc d-flex justify-content-around align-items-center">
+
                                     <div class="td">{{$fightWithPlayers->players[0]->years}}</div>
+                                    @if ($fightWithPlayers->players[0]->years != '' || $fightWithPlayers->players[1]->years != '')
                                         <div class="td">Years</div>
+                                    @endif
                                     <div class="td">{{$fightWithPlayers->players[1]->years}}</div>
-                                </div>
-                                @endif
 
+
+
+                                </div>
                                 {{-- Role --}}
-                                @if ($fightWithPlayers->players[0]->role != '' || $fightWithPlayers->players[1]->role != '')
                                 <div class="tc d-flex justify-content-around align-items-center">
+
                                     <div class="td">{{$fightWithPlayers->players[0]->role}}</div>
+                                    @if ($fightWithPlayers->players[0]->role != '' || $fightWithPlayers->players[1]->role != '')
                                         <div class="td">Role</div>
+                                    @endif
                                     <div class="td">{{$fightWithPlayers->players[1]->role}}</div>
-                                </div>
-                                @endif
 
+
+
+                                </div>
                                 {{-- Sport --}}
-                                @if ($fightWithPlayers->players[0]->sport != '' || $fightWithPlayers->players[1]->sport != '')
-
                                 <div class="tc d-flex justify-content-around align-items-center">
+
                                     <div class="td">{{$fightWithPlayers->players[0]->sport}}</div>
+                                    @if ($fightWithPlayers->players[0]->sport != '' || $fightWithPlayers->players[1]->sport != '')
                                         <div class="td">Sport</div>
+                                    @endif
                                     <div class="td">{{$fightWithPlayers->players[1]->sport}}</div>
-                                </div>
-                                @endif
 
+
+
+                                </div>
                                 {{-- Record --}}
-                                @if ($fightWithPlayers->players[0]->record != '' || $fightWithPlayers->players[1]->record != '')
-
                                 <div class="tc d-flex justify-content-around align-items-center">
-                                    <div class="td">{{$fightWithPlayers->players[0]->record}}</div>
-                                        <div class="td">Record</div>
-                                    <div class="td">{{$fightWithPlayers->players[1]->record}}</div>
-                                </div>
-                                @endif
 
+                                    <div class="td">{{$fightWithPlayers->players[0]->record}}</div>
+                                    @if ($fightWithPlayers->players[0]->record != '' || $fightWithPlayers->players[1]->record != '')
+                                        <div class="td">Record</div>
+                                    @endif
+                                    <div class="td">{{$fightWithPlayers->players[1]->record}}</div>
+
+
+
+                                </div>
                                 {{-- Shows --}}
                                 <div class="tc d-flex justify-content-around align-items-center">
+
                                     <div class="td">{{$fightWithPlayers->players[0]->shows}}</div>
                                     @if ($fightWithPlayers->players[0]->shows != '' || $fightWithPlayers->players[1]->shows != '')
                                         <div class="td">Shows</div>
@@ -197,45 +211,49 @@
 
                                 </div>
                                 {{-- Game --}}
-                                @if ($fightWithPlayers->players[0]->game != '' || $fightWithPlayers->players[1]->game != '')
-
                                 <div class="tc d-flex justify-content-around align-items-center">
+
                                     <div class="td">{{$fightWithPlayers->players[0]->game}}</div>
+                                    @if ($fightWithPlayers->players[0]->game != '' || $fightWithPlayers->players[1]->game != '')
                                         <div class="td">Game</div>
+                                    @endif
                                     <div class="td">{{$fightWithPlayers->players[1]->game}}</div>
+
+
+
                                 </div>
-                                @endif
-
                                 {{-- Debut --}}
-                                @if ($fightWithPlayers->players[0]->debut != '' || $fightWithPlayers->players[1]->debut != '')
-
                                 <div class="tc d-flex justify-content-around align-items-center">
+
                                     <div class="td">{{$fightWithPlayers->players[0]->debut}}</div>
+                                    @if ($fightWithPlayers->players[0]->debut != '' || $fightWithPlayers->players[1]->debut != '')
                                         <div class="td">Debut</div>
+                                    @endif
                                     <div class="td">{{$fightWithPlayers->players[1]->debut}}</div>
                                 </div>
-                                @endif
-
                                 {{-- Type --}}
-                                @if ($fightWithPlayers->players[0]->type != '' || $fightWithPlayers->players[1]->type != '')
-
                                 <div class="tc d-flex justify-content-around align-items-center">
+
                                     <div class="td">{{$fightWithPlayers->players[0]->type}}</div>
+                                    @if ($fightWithPlayers->players[0]->type != '' || $fightWithPlayers->players[1]->type != '')
                                         <div class="td">Type</div>
+                                    @endif
                                     <div class="td">{{$fightWithPlayers->players[1]->type}}</div>
-                                </div>
-                                @endif
 
+
+                                </div>
                                 {{-- Identity --}}
-                                @if ($fightWithPlayers->players[0]->identity != '' || $fightWithPlayers->players[1]->identity != '')
-
                                 <div class="tc d-flex justify-content-around align-items-center">
-                                    <div class="td">{{$fightWithPlayers->players[0]->identity}}</div>
-                                        <div class="td">Identity</div>
-                                    <div class="td">{{$fightWithPlayers->players[1]->identity}}</div>
-                                </div>
-                                @endif
 
+                                    <div class="td">{{$fightWithPlayers->players[0]->identity}}</div>
+                                    @if ($fightWithPlayers->players[0]->identity != '' || $fightWithPlayers->players[1]->identity != '')
+                                        <div class="td">Identity</div>
+                                    @endif
+                                    <div class="td">{{$fightWithPlayers->players[1]->identity}}</div>
+
+
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -245,17 +263,14 @@
                     <div class="col-lg-4 col-md-4 p2-col mb-2">
                         <div class="btn-lg btn-primary btn-block mb-2 d-none">Player 2 </div>
                         <div class="card" >
-                            <a href="/players/{{$fightWithPlayers->players[1]->id}}">
-                                <img class="card-img-top card-i" src="/{{ $fightWithPlayers->players[1]->image}}" alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="h4 text-center">{{ $fightWithPlayers->players[1]->name }}</p>
-                                </div>
-                            </a>
+                            <img class="card-img-top card-i" src="/{{ $fightWithPlayers->players[1]->image}}" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="h4 text-center">{{ $fightWithPlayers->players[1]->name }}</p>
+                            </div>
                         </div>
 
                         @if( !is_null($cookie))
-                            <h2 class="text-center view-vote text-white mt-2 font-weight-bolder"><span class="num-count">{{ ($vote_2  )?: 0 }}</span> % </h2>
-
+                            <h2 class="text-center view-vote text-white mt-2 font-weight-bolder">{{ ($vote_2  )?: 0 }} % </h2>
                         @else
                             <form method="post" action="{{ route('fights.addVote', [$fightWithPlayers->id, $fightWithPlayers->players[1]->id] )
                         }}">
@@ -277,13 +292,13 @@
             <div class="d-md-none d-lg-block d-xl-block">
                 <div class="np-buttons custom-pagi w-100 ">
                     @if($prv_fight != 0)
-                        <a class="prev-f" href="/{{$fightCatName}}/fights/{{$prv_fight}}">
+                        <a class="prev-f" href="/fights/{{$prv_fight}}">
                             <span class="n-icon bg-primary p-2"><i class="fas fa-chevron-left"></i></span>
                             <span class="prev-f-text pr-2">Previous</br>Fight</span>
                         </a>
                     @endif
                     @if($next_fight != 0)
-                        <a class="next-f" href="/{{$fightCatName}}/fights/{{$next_fight}}">
+                        <a class="next-f" href="/fights/{{$next_fight}}">
                             <span class="next-f-text pl-3">Next</br>Fight</span>
                             <span class="n-icon bg-primary p-2"><i class="fas fa-chevron-right"></i></span>
                         </a>
@@ -308,14 +323,10 @@
                         <div class="player d-flex justify-content-around" style="width: 100%; max-height: 250px;">
                             <h5 class="vs">VS</h5>
                             <div class="x_player" style="width: 50%;">
-                                <a href="/players/{{$fightWithPlayers->players[0]->id}}">
-                                 <img class="card-img-top " src="/{{ $fightWithPlayers->players[0]->image}}" alt="">
-                                </a>
+                                <img class="card-img-top " src="/{{ $fightWithPlayers->players[0]->image}}" alt="">
                             </div>
                             <div class="x_player" style="width: 50%;">
-                                <a href="/players/{{$fightWithPlayers->players[1]->id}}">
-                                    <img class="card-img-top "  src="/{{ $fightWithPlayers->players[1]->image}}" alt="">
-                                </a>
+                                <img class="card-img-top "  src="/{{ $fightWithPlayers->players[1]->image}}" alt="">
                             </div>
                         </div>
                     </div>
@@ -326,13 +337,13 @@
                 <div class="col-sm-12 np-buttons w-100 mt-2 " style="position: relative">
                     <div class="custom-pagi-m">
                         @if($prv_fight != 0)
-                            <a class="prev-f" href="/{{$fightCatName}}/fights/{{$prv_fight}}">
+                            <a class="prev-f" href="/fights/{{$prv_fight}}">
                                 <span class="n-icon bg-primary p-2"><i class="fas fa-chevron-left"></i></span>
                                 <span class="prev-f-text pr-2">Previous</br>Fight</span>
                             </a>
                         @endif
                         @if($next_fight != 0)
-                            <a class="next-f" href="/{{$fightCatName}}/fights/{{$next_fight}}">
+                            <a class="next-f" href="/fights/{{$next_fight}}">
                                 <span class="next-f-text pl-3">Next</br>Fight</span>
                                 <span class="n-icon bg-primary p-2"><i class="fas fa-chevron-right"></i></span>
                             </a>
@@ -349,184 +360,160 @@
 
 
 
+
+
                         {{-- ------------------------------------------------------------------------------ --}}
                         <div class="text-center">
                             {{-- Nationality --}}
-                            @if ($fightWithPlayers->players[0]->from != '' || $fightWithPlayers->players[1]->from != '')
-
                             <div class="tc d-flex justify-content-around align-items-center">
                                 <div class="td">{{$fightWithPlayers->players[0]->from}}</div>
+                                @if ($fightWithPlayers->players[0]->from != '' || $fightWithPlayers->players[1]->from != '')
                                     <div class="td">Nationality</div>
+                                @endif
                                 <div class="td">{{$fightWithPlayers->players[1]->from}}</div>
                             </div>
-                            @endif
-
                             {{-- Height --}}
-                            @if ($fightWithPlayers->players[0]->Height != '' || $fightWithPlayers->players[1]->Height != '')
-
                             <div class="tc d-flex justify-content-around align-items-center">
                                 <div class="td">{{$fightWithPlayers->players[0]->Height}}</div>
+                                @if ($fightWithPlayers->players[0]->Height != '' || $fightWithPlayers->players[1]->Height != '')
                                     <div class="td">Height</div>
+                                @endif
                                 <div class="td">{{$fightWithPlayers->players[1]->Height}}</div>
 
 
 
                             </div>
-                            @endif
-
                             {{-- Weight --}}
-                            @if ($fightWithPlayers->players[0]->weight != '' || $fightWithPlayers->players[1]->weight != '')
-
                             <div class="tc d-flex justify-content-around align-items-center">
                                 <div class="td">{{$fightWithPlayers->players[0]->weight}}</div>
+                                @if ($fightWithPlayers->players[0]->weight != '' || $fightWithPlayers->players[1]->weight != '')
                                     <div class="td">Weight</div>
+                                @endif
                                 <div class="td">{{$fightWithPlayers->players[1]->weight}}</div>
 
 
 
                             </div>
-                            @endif
-
                             {{-- Age --}}
-                            @if ($fightWithPlayers->players[0]->age != '' || $fightWithPlayers->players[1]->age != '')
-
                             <div class="tc d-flex justify-content-around align-items-center">
 
                                 <div class="td">{{$fightWithPlayers->players[0]->age}}</div>
+                                @if ($fightWithPlayers->players[0]->age != '' || $fightWithPlayers->players[1]->age != '')
                                     <div class="td">Age</div>
+                                @endif
                                 <div class="td">{{$fightWithPlayers->players[1]->age}}</div>
 
 
 
                             </div>
-                            @endif
-
                             {{-- Size --}}
-                            @if ($fightWithPlayers->players[0]->size != '' || $fightWithPlayers->players[1]->size != '')
-
                             <div class="tc d-flex justify-content-around align-items-center">
 
                                 <div class="td">{{$fightWithPlayers->players[0]->size}}</div>
+                                @if ($fightWithPlayers->players[0]->size != '' || $fightWithPlayers->players[1]->size != '')
                                     <div class="td">Size</div>
+                                @endif
                                 <div class="td">{{$fightWithPlayers->players[1]->size}}</div>
 
 
 
                             </div>
-                            @endif
-
                             {{-- Continent --}}
-                            @if ($fightWithPlayers->players[0]->continent != '' || $fightWithPlayers->players[1]->continent != '')
-
                             <div class="tc d-flex justify-content-around align-items-center">
 
                                 <div class="td">{{$fightWithPlayers->players[0]->continent}}</div>
+                                @if ($fightWithPlayers->players[0]->continent != '' || $fightWithPlayers->players[1]->continent != '')
                                     <div class="td">Continent</div>
+                                @endif
                                 <div class="td">{{$fightWithPlayers->players[1]->continent}}</div>
 
 
 
                             </div>
-                            @endif
-
                             {{-- Area --}}
-                            @if ($fightWithPlayers->players[0]->area != '' || $fightWithPlayers->players[1]->area != '')
-
                             <div class="tc d-flex justify-content-around align-items-center">
 
                                 <div class="td">{{$fightWithPlayers->players[0]->area}}</div>
+                                @if ($fightWithPlayers->players[0]->area != '' || $fightWithPlayers->players[1]->area != '')
                                     <div class="td">Area</div>
+                                @endif
                                 <div class="td">{{$fightWithPlayers->players[1]->area}}</div>
 
 
 
                             </div>
-                            @endif
-
                             {{-- Speed --}}
-                            @if ($fightWithPlayers->players[0]->speed != '' || $fightWithPlayers->players[1]->area != '')
-
                             <div class="tc d-flex justify-content-around align-items-center">
 
                                 <div class="td">{{$fightWithPlayers->players[0]->speed}}</div>
+                                @if ($fightWithPlayers->players[0]->speed != '' || $fightWithPlayers->players[1]->area != '')
                                     <div class="td">Speed</div>
+                                @endif
                                 <div class="td">{{$fightWithPlayers->players[1]->speed}}</div>
 
 
 
                             </div>
-                            @endif
-
                             {{-- Attacks --}}
-                            @if ($fightWithPlayers->players[0]->attacks != '' || $fightWithPlayers->players[1]->attacks != '')
-
                             <div class="tc d-flex justify-content-around align-items-center">
 
                                 <div class="td">{{$fightWithPlayers->players[0]->attacks}}</div>
+                                @if ($fightWithPlayers->players[0]->attacks != '' || $fightWithPlayers->players[1]->attacks != '')
                                     <div class="td">Attacks</div>
+                                @endif
                                 <div class="td">{{$fightWithPlayers->players[1]->attacks}}</div>
 
 
 
                             </div>
-                            @endif
-
                             {{-- Years --}}
-                            @if ($fightWithPlayers->players[0]->years != '' || $fightWithPlayers->players[1]->years != '')
-
                             <div class="tc d-flex justify-content-around align-items-center">
 
                                 <div class="td">{{$fightWithPlayers->players[0]->years}}</div>
+                                @if ($fightWithPlayers->players[0]->years != '' || $fightWithPlayers->players[1]->years != '')
                                     <div class="td">Years</div>
+                                @endif
                                 <div class="td">{{$fightWithPlayers->players[1]->years}}</div>
 
 
 
                             </div>
-                            @endif
-
                             {{-- Role --}}
-                            @if ($fightWithPlayers->players[0]->role != '' || $fightWithPlayers->players[1]->role != '')
-
                             <div class="tc d-flex justify-content-around align-items-center">
 
                                 <div class="td">{{$fightWithPlayers->players[0]->role}}</div>
+                                @if ($fightWithPlayers->players[0]->role != '' || $fightWithPlayers->players[1]->role != '')
                                     <div class="td">Role</div>
+                                @endif
                                 <div class="td">{{$fightWithPlayers->players[1]->role}}</div>
 
 
 
                             </div>
-                            @endif
-
                             {{-- Sport --}}
-                            @if ($fightWithPlayers->players[0]->sport != '' || $fightWithPlayers->players[1]->sport != '')
-
                             <div class="tc d-flex justify-content-around align-items-center">
 
                                 <div class="td">{{$fightWithPlayers->players[0]->sport}}</div>
+                                @if ($fightWithPlayers->players[0]->sport != '' || $fightWithPlayers->players[1]->sport != '')
                                     <div class="td">Sport</div>
+                                @endif
                                 <div class="td">{{$fightWithPlayers->players[1]->sport}}</div>
 
 
 
                             </div>
-                            @endif
-
                             {{-- Record --}}
-                            @if ($fightWithPlayers->players[0]->record != '' || $fightWithPlayers->players[1]->record != '')
-
                             <div class="tc d-flex justify-content-around align-items-center">
 
                                 <div class="td">{{$fightWithPlayers->players[0]->record}}</div>
+                                @if ($fightWithPlayers->players[0]->record != '' || $fightWithPlayers->players[1]->record != '')
                                     <div class="td">Record</div>
+                                @endif
                                 <div class="td">{{$fightWithPlayers->players[1]->record}}</div>
 
 
 
                             </div>
-                            @endif
-
                             {{-- Shows --}}
                             <div class="tc d-flex justify-content-around align-items-center">
 
@@ -540,62 +527,54 @@
 
                             </div>
                             {{-- Game --}}
-                            @if ($fightWithPlayers->players[0]->game != '' || $fightWithPlayers->players[1]->game != '')
-
                             <div class="tc d-flex justify-content-around align-items-center">
 
                                 <div class="td">{{$fightWithPlayers->players[0]->game}}</div>
+                                @if ($fightWithPlayers->players[0]->game != '' || $fightWithPlayers->players[1]->game != '')
                                     <div class="td">Game</div>
+                                @endif
                                 <div class="td">{{$fightWithPlayers->players[1]->game}}</div>
 
 
 
                             </div>
-                            @endif
-
                             {{-- Debut --}}
-                            @if ($fightWithPlayers->players[0]->debut != '' || $fightWithPlayers->players[1]->debut != '')
-
                             <div class="tc d-flex justify-content-around align-items-center">
 
                                 <div class="td">{{$fightWithPlayers->players[0]->debut}}</div>
+                                @if ($fightWithPlayers->players[0]->debut != '' || $fightWithPlayers->players[1]->debut != '')
                                     <div class="td">Debut</div>
+                                @endif
                                 <div class="td">{{$fightWithPlayers->players[1]->debut}}</div>
                             </div>
-                            @endif
-
                             {{-- Type --}}
-                            @if ($fightWithPlayers->players[0]->type != '' || $fightWithPlayers->players[1]->type != '')
-
                             <div class="tc d-flex justify-content-around align-items-center">
 
                                 <div class="td">{{$fightWithPlayers->players[0]->type}}</div>
+                                @if ($fightWithPlayers->players[0]->type != '' || $fightWithPlayers->players[1]->type != '')
                                     <div class="td">Type</div>
+                                @endif
                                 <div class="td">{{$fightWithPlayers->players[1]->type}}</div>
 
 
                             </div>
-                            @endif
-
                             {{-- Identity --}}
-                            @if ($fightWithPlayers->players[0]->identity != '' || $fightWithPlayers->players[1]->identity != '')
-
                             <div class="tc d-flex justify-content-around align-items-center">
 
                                 <div class="td">{{$fightWithPlayers->players[0]->identity}}</div>
+                                @if ($fightWithPlayers->players[0]->identity != '' || $fightWithPlayers->players[1]->identity != '')
                                     <div class="td">Identity</div>
+                                @endif
                                 <div class="td">{{$fightWithPlayers->players[1]->identity}}</div>
 
 
 
                             </div>
-                            @endif
-
                             {{-- vote --}}
                             <div class="tc d-flex justify-content-around align-items-center">
                                 <div class="td">
                                     @if( !is_null($cookie))
-                                        <h2 class="text-center view-vote mt-2 font-weight-bolder"><span class="num-count">{{ ($vote_1)?: 0 }}</span> % </h2>
+                                        <h4 class="text-center view-vote mt-2 font-weight-bolder">{{ ($vote_1)?: 0 }} % </h4>
                                     @else
                                         <form method="post" action="{{
                                     route('fights.addVote', [$fightWithPlayers->id, $fightWithPlayers->players[0]->id] )
@@ -616,8 +595,7 @@
 
                                 <div class="td">
                                         @if( !is_null($cookie))
-
-                                        <h2 class="text-center view-vote mt-2 font-weight-bolder"><span class="num-count">{{ ($vote_2)?: 0 }}</span> % </h2>
+                                            <h4 class="text-center view-vote mt-2 font-weight-bolder">{{ ($vote_2)?: 0 }} % </h4>
                                         @else
                                             <form method="post" action="{{
                                             route('fights.addVote', [$fightWithPlayers->id, $fightWithPlayers->players[1]->id] )
@@ -703,7 +681,7 @@
                                 <div class="card-body text-dark">
                                     <ul class="list-group list-group-flush">
                                         @foreach($top_votes as $top_vote)
-                                            <li class="list-group-item"><a href="/{{str_slug($top_vote->fightCategory->fight_group_name)}}/fights/{{$top_vote->id}}">{{$top_vote->fight_name}}</a></li>
+                                            <li class="list-group-item"><a href="/fights/{{$top_vote->id}}">{{$top_vote->fight_name}}</a></li>
                                         @endforeach
                                     </ul>
                                 </div>
@@ -713,7 +691,7 @@
                                 <div class="card-body text-dark">
                                     <ul class="list-group list-group-flush">
                                         @foreach($top_fights as $top_fight)
-                                            <li class="list-group-item"><a href="/{{str_slug($top_fight->fightCategory->fight_group_name)}}/fights/{{$top_fight->id}}">{{$top_fight->fight_name}}</a></li>
+                                            <li class="list-group-item"><a href="/fights/{{$top_fight->id}}">{{$top_fight->fight_name}}</a></li>
                                         @endforeach
 
                                     </ul>
@@ -725,14 +703,4 @@
             </div>
         </div>
     </section>
-
-@endsection
-
-@section('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js"></script>
-
-    <script type="text/javascript">
-        $(".num-count").counterUp({delay:10,time:4000});
-    </script>
 @endsection

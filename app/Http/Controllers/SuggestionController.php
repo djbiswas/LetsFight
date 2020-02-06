@@ -62,7 +62,7 @@ class SuggestionController extends Controller
 
         $suggestion->save();
 
-        flash('Your Suggestion send Success')->success();
+        flash('Your suggestion was sent successfully')->success();
 
         return redirect()->route('fightCategory.index');
     }

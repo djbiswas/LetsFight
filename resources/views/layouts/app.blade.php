@@ -22,6 +22,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/front.css') }}" rel="stylesheet">
+
+
+    @yield('end_head')
 </head>
 <body>
     <div id="app">
@@ -90,10 +93,14 @@
 
         </main>
 
-    <footer class=" page-footer bg-white text-center p-2 footer">
-        <p class="text-primary m-0">&copy; 2020 vsclash.com. All rights reserved.Designed and Developed By &nbsp; &nbsp;<a href="http://softxltd.com/"><img src="/images/softx.png" alt="" srcset="" width="100px"></a></p>
+    <footer class=" page-footer text-center p-2 footer" style="background: #171717">
+        <p class="text-primary m-0">&copy; 2020 vsclash.com. All rights reserved.  Designed and Developed By &nbsp; &nbsp;<a href="http://softxltd.com/"><img src="/images/softx.png" alt="" srcset="" width="100px"></a></p>
 
     </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    @yield('scripts')
 
 </body>
 </html>
