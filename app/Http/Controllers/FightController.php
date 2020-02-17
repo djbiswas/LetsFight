@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Comment;
 use App\Fight;
 use App\FightCategory;
+use App\Most_voted;
 use App\Player;
 use App\Setting;
 use App\ViewVote;
@@ -127,8 +128,9 @@ class FightController extends Controller
 
 
 
-        $top_fights = Fight::with('fightCategory')->take(5)->get();
-        $top_votes = Fight::with('fightCategory')->orderBy('id','desc')->take(5)->get();
+        $top_fights = Fight::with('fightCategory')->orderBy('id','desc')->take(5)->get();
+//        $top_votes = Fight::with('fightCategory')->orderBy('id','desc')->take(5)->get();
+        $top_votes = Most_voted::take(5)->get();
 
         $player_1 =  $fightWithPlayers->players[0]->id;
         $player_2 =  $fightWithPlayers->players[1]->id;
@@ -275,23 +277,20 @@ class FightController extends Controller
 
         $voat_check = Vote::where('fight_id',$fight->id)->where('visitor_ip',$request->ip())->first();
 
-        if($voat_check){
-            //flash('You can vote once.')->success();
-            return back();
-        }
 
         $cookieName= Str::slug($fight->fight_name,'-') ;
         $client_ip = $request->ip();
         $vote = $request->merge(['visitor_ip' => $client_ip, 'player_id' => $player])->all();
-
+        if($voat_check){
+            //flash('You can vote once.')->success();
+            return back()->cookie($cookieName, $client_ip, 525600);
+        }
         $addVote= $fight->votes()->create($vote);
 
         return back()->cookie($cookieName, $client_ip, 525600);
     }
 
     public function addComment(Request $request, Fight $fight){
-
-
      $newComment = $fight->comments()
          ->create($request->merge(
              ['user_id' => auth()->id()])->all()
@@ -305,6 +304,5 @@ class FightController extends Controller
             $data = view('fights.getPlayers',compact('players'))->render();
             return response()->json(['options'=>$data]);
         }
-
     }
 }

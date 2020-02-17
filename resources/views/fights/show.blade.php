@@ -703,13 +703,13 @@
                                 <div class="card-body text-dark">
                                     <ul class="list-group list-group-flush">
                                         @foreach($top_votes as $top_vote)
-                                            <li class="list-group-item"><a href="/{{str_slug($top_vote->fightCategory->fight_group_name)}}/fights/{{$top_vote->id}}">{{$top_vote->fight_name}}</a></li>
+                                            <li class="list-group-item"><a href="/{{str_slug($top_vote->fight_group_name)}}/fights/{{$top_vote->fight_id}}">{{$top_vote->fight_name}}</a></li>
                                         @endforeach
                                     </ul>
                                 </div>
                             </div>
                             <div class="card card-accent-dark mb-3">
-                                <div class="card-header">Recent Fights</div>
+                                <div class="card-header">Recently Added</div>
                                 <div class="card-body text-dark">
                                     <ul class="list-group list-group-flush">
                                         @foreach($top_fights as $top_fight)
@@ -733,6 +733,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js"></script>
 
     <script type="text/javascript">
-        $(".num-count").counterUp({delay:10,time:4000});
+        $(".num-count").counterUp({delay:10,time:2000});
     </script>
 @endsection
